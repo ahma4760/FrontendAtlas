@@ -1,0 +1,30 @@
+body{
+    margin: 0;
+    font-family:'Arial',sans-serif;
+}
+.header{
+    background-color: black;
+    color: orange;
+    text-align: center;
+    padding: 20px;
+}
+.sidebar{
+    background-color: black;
+    color: orange;
+    padding: 20px;
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+}
+.sidebar ul{
+    list-style-type: none;
+    padding: 0;
+}
+.sidebar li{
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.content{
+    margin-left: 220px;
+    padding: 20px;
+}
