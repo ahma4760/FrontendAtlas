@@ -15,17 +15,26 @@ body {
 .main-container {
     display: flex;
 }
+.center-text{
+    text-align:center;
+    margin-left:250px; /*This line of code is making the menukort to the middel*/
+    width: 70%;
+    color: orange;
+    font-size: 30px;
+    padding: 2px;
+}
 
+/* The code for adjusting the sidebar */
 .sidebar {
     background-color: black;
     color: orange;
-    padding: 20px;
+    padding: 18px;
     width: 150px;
     height: 40vh;
     position: fixed;
     z-index: 1;
    left: 50%;
-    top: 50%;
+    top: 54%;
     transform: translate(-220%,-50%);
 }
 
@@ -38,7 +47,7 @@ body {
     margin-bottom: 10px;
     cursor: pointer;
 }
-
+/*The code for adjusting the pizza submenu*/
 .pizza-submenu {
     list-style-type: none;
     padding: 0;
@@ -48,6 +57,31 @@ body {
 
 .pizza-submenu li {
     margin-bottom: 5px;
+    cursor: pointer;
+}
+.pizza-list{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.pizza-list li{
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.pizza-list li p:first-child{
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    transform: translate(-11%,-1%);
+    cursor: pointer;
+}
+
+.pizza-list li p:last-child{
+    font-size: 10px;
+    font-weight: bold;
+    color: black;
+    padding: 1px;
+    transform: translate(-11%,-1%);
     cursor: pointer;
 }
 
