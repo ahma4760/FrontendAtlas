@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.orange-outline {
+    border: 5px solid orange;
+    width: 90%;
+    height: 70%;
+    display: flex; /* Use Flexbox to position children */
+}
+
+.info-box {
+    flex: 1; /* Take up the available space */
+    padding: 200px; /* Add padding for better visibility */
+    box-sizing: border-box; /* Include padding in the box size calculation */
+    text-align: left;
+    color: white;
+    margin-left: 100px;
+}
+
+.info-box h1 {
+    margin-bottom: 5px;
+}
+
+.info-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.info-box li {
+    margin-bottom: 5px;
+}
+
+.info-box span {
+    background-color: #ddd;
+    padding: 2px 5px;
+    margin-left: 5px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.centered-list {
+
+    overflow-y: auto; /* Enable vertical scrollbar when content overflows */
+    max-height: 500px; /* Set the max height for the scrollable box */
+    flex: 1; /* Take up the available space */
+    padding: 20px; /* Add padding for better visibility */
+    box-sizing: border-box; /* Include padding in the box size calculation */
+    margin-top: 10px;
+    margin-left: 240px;
+
+}
+
+.centered-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.centered-list li {
+    margin-bottom: 10px;
+    color: white;
+}
+
+h2 {
+    color: white;
+
+}
+
+.centered-list h1{
+    color: white;
+    margin-left: -15px;
+    margin-bottom: 30px;
+}
+
+.list-outline {
+    border: 5px solid orange;
+    width: 40%;
+    height: 70%;
+    display: flex;
+    margin-right: 100px;
+    margin-top: 70px;
+    border-radius: 30px;
+}
+
+.pizza-info {
+    text-align: left;
+    color: white;
+}
+
+.pizza-info h1 {
+    font-size: larger;
+    margin-bottom: 5px;
+}
+
+.pizza-info p {
+
+}
