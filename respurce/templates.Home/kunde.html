@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../static/css/kunde.css">
 </head>
 <body>
+
 <div class="orange-outline">
     <div class="info-box">
         <h1 contenteditable="true">John Doe</h1>
@@ -15,68 +16,74 @@
             <li>Phone: <span contenteditable="true">+1234567890</span></li>
         </ul>
     </div>
-    <!-- Use the correct class name here -->
     <div class="list-outline">
     <div class="centered-list">
         <h1>Orders</h1>
-
         <ul>
-            <li>
-                <div class="pizza-info">
-                    <h1>Margarita Pizza</h1>
-                    <p><strong>Price:</strong> $10.99</p>
-                    <p><strong>Status:</strong> In Progress</p>
+            <div class="col-md-4 col-xl-3">
+                <div class="card bg-c-green order-card">
+                    <div class="card-block">
+                        <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>Margarita Pizza</span></h2>
+                        <p class="m-b-0">Order status<span class="f-right">In Progress</span></p>
+                    </div>
                 </div>
-            </li>
-            <li>
-                <div class="pizza-info">
-                    <h1>Shawarma Pizza</h1>
-                    <p><strong>Price:</strong> $10.99</p>
-                    <p><strong>Status:</strong> In Progress</p>
+            </div>
+            <div class="col-md-4 col-xl-3">
+                <div class="card bg-c-green order-card">
+                    <div class="card-block">
+                        <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>Margarita Pizza</span></h2>
+                        <p class="m-b-0">Order status<span class="f-right">In Progress</span></p>
+                    </div>
                 </div>
-            </li>
-            <li>
-                <div class="pizza-info">
-                    <h1>Durum</h1>
-                    <p><strong>Price:</strong> $10.99</p>
-                    <p><strong>Status:</strong> In Progress</p>
+            </div>
+            <div class="col-md-4 col-xl-3">
+                <div class="card bg-c-green order-card">
+                    <div class="card-block">
+                        <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>Margarita Pizza</span></h2>
+                        <p class="m-b-0">Order status<span class="f-right">In Progress</span></p>
+                    </div>
                 </div>
-            </li>
-            <li>
-                <div class="pizza-info">
-                    <h1>Salat</h1>
-                    <p><strong>Price:</strong> $10.99</p>
-                    <p><strong>Status:</strong> In Progress</p>
-                </div>
-            </li>
-            <li>
-                <div class="pizza-info">
-                    <h1>Margarita Pizza</h1>
-                    <p><strong>Price:</strong> $10.99</p>
-                    <p><strong>Status:</strong> In Progress</p>
-                </div>
-            </li>
-            <li>
-                <div class="pizza-info">
-                    <h1>Margarita Pizza</h1>
-                    <p><strong>Price:</strong> $10.99</p>
-                    <p><strong>Status:</strong> In Progress</p>
-                </div>
-            </li>
-            <li>
-                <div class="pizza-info">
-                    <h1>Margarita Pizza</h1>
-                    <p><strong>Price:</strong> $10.99</p>
-                    <p><strong>Status:</strong> In Progress</p>
-                </div>
-            </li>
-
-
-
+            </div>
             <!-- Add more list items as needed -->
         </ul>
     </div>
+        <!--Punch card -->
     </div>
+    <div class="stamp-card">
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+    </div>
+
+    <button id="changeColorButton">Change Color</button>
+
+    <script>
+        <!-- JS For Punch card -->
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentStampIndex = 0;
+            var stamps = document.querySelectorAll('.stamp');
+
+            document.getElementById('changeColorButton').addEventListener('click', function () {
+                stamps[currentStampIndex].classList.toggle('white');
+                currentStampIndex = (currentStampIndex + 1) % stamps.length;
+            });
+        });
+
+
+
+
+
+    </script>
+
+
+
 </div>
 </body>
 </html>

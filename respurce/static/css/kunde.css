@@ -22,6 +22,7 @@ body {
     text-align: left;
     color: white;
     margin-left: 100px;
+    margin-top: -150px;
 }
 
 .info-box h1 {
@@ -50,10 +51,11 @@ body {
     overflow-y: auto; /* Enable vertical scrollbar when content overflows */
     max-height: 500px; /* Set the max height for the scrollable box */
     flex: 1; /* Take up the available space */
-    padding: 20px; /* Add padding for better visibility */
+    padding: 10px; /* Add padding for better visibility */
     box-sizing: border-box; /* Include padding in the box size calculation */
     margin-top: 10px;
-    margin-left: 240px;
+    margin-left: 100px;
+    margin-right: 50px;
 
 }
 
@@ -62,9 +64,12 @@ body {
     padding: 0;
 }
 
-.centered-list li {
-    margin-bottom: 10px;
+
+
+.centered-list h1 {
     color: white;
+    margin-left: -15px;
+    margin-bottom: 30px;
 }
 
 h2 {
@@ -72,11 +77,6 @@ h2 {
 
 }
 
-.centered-list h1{
-    color: white;
-    margin-left: -15px;
-    margin-bottom: 30px;
-}
 
 .list-outline {
     border: 5px solid orange;
@@ -101,3 +101,87 @@ h2 {
 .pizza-info p {
 
 }
+
+
+
+
+
+
+.bg-c-green {
+    background: linear-gradient(45deg,darkorange,orange);
+}
+
+
+.card {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+    box-shadow: 0 1px 2.94px 0.06px rgba(4,26,55,0.16);
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    width: auto;
+
+}
+
+.card .card-block {
+    padding: 25px;
+}
+
+.order-card i {
+    font-size: 26px;
+}
+
+.f-left {
+    float: left;
+}
+
+.f-right {
+    float: right;
+}
+
+
+
+.stamp-card {
+    position: fixed;
+    width: 370px;
+    height: 150px;
+    background-color: darkorange;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 385px; /* Adjust this value to move it up or down */
+    margin-left: 250px;
+
+}
+
+.stamp {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.white {
+    background-color: white;
+}
+
+#changeColorButton
+{
+    margin-left: 250px;
+    margin-top: 550px;
+    position: fixed;
+}
+
+
+.stamp:nth-child(1) { top: 20px; left: 20px; }
+.stamp:nth-child(2) { top: 20px; left: 90px; }
+.stamp:nth-child(3) { top: 20px; left: 160px; }
+.stamp:nth-child(4) { top: 90px; left: 20px; }
+.stamp:nth-child(5) { top: 90px; left: 90px; }
+.stamp:nth-child(6) { top: 90px; left: 160px; }
+.stamp:nth-child(7) { top: 90px; left: 230px; }
+.stamp:nth-child(8) { top: 20px; left: 230px; }
+.stamp:nth-child(9) { top: 20px; left: 300px; }
+.stamp:nth-child(10) { top: 90px; left: 300px; }
