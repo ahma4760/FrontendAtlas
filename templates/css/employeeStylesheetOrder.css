@@ -1,0 +1,94 @@
+/* Example styles, adjust as needed */
+
+.order-container {
+    padding: 15px;
+    padding-left: 10%;  
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-container {
+    flex: 8;
+}
+
+.timestamp {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.37);
+}
+
+.order-info {
+    color: orange;
+    font-size: 30px;
+}
+
+.customer-info {
+    color: rgba(255, 255, 255, 0.37);
+    font-size: 15px;
+}
+
+.ordered-pizzas {
+    margin-top: 5px;
+    color: #ffffff;
+    font-size: 25px;
+}
+
+.total-price {
+    margin-top: 5px;
+    color: rgba(255, 255, 255, 0.37);
+    font-size: 15px;
+}
+
+.actions {
+    display: flex;
+    flex: 2;
+    margin-top: 15px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.confirmButton{
+    display: inline-block;
+    padding: 14px 24px;
+    background-color: orange;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 21px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.7s;
+}
+
+.confirmButton:hover{
+    background-color: #078c07;
+    padding: 20px 30px;
+    font-size: 25px;
+    color: black;
+}
+
+.declineButton{
+    display: inline-block;
+    padding: 14px 24px;
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 21px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.7s;
+}
+
+.declineButton:hover{
+    background-color: #c90000;
+    padding: 20px 30px;
+    font-size: 25px;
+    color: #000000;
+}
+
+.confirm-button,
+.decline-button {
+    display: block;
+    width: 100px;
+    margin-bottom: 5px;
+}
