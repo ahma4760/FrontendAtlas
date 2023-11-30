@@ -7,6 +7,17 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <title>Pizza Place Menu</title>
   <style>
+    body {
+      background-color: black;
+      color: #fff;
+      transition: background-color 0.5s ease;
+      border: 1px solid orange;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
     .dish-popup {
       position: fixed;
       display: none;
@@ -14,6 +25,7 @@
       padding: 10px;
       background-color: #fff;
       box-shadow: 0px 0px 10px 0px #000;
+      z-index: 999; /* Ensure the popup is above other elements */
     }
 
     .dish-image {
@@ -22,207 +34,277 @@
     }
 
     .dish-row {
-      transition: transform 0.2s; /* Smooth transition for scaling */
+      transition: transform 0.2s;
+      color: white;
     }
 
     .dish-row:hover {
       cursor: pointer;
-      background-color: #f8f9fa; /* Highlight on hover */
-      transform: scale(1.05); /* Grow on hover */
+      background-color: orange;
+      transform: scale(1.05);
+      color: #1a1a1a;
     }
 
     .remove-icon {
       max-width: 20px;
       cursor: pointer;
     }
+
+    .container {
+      background-color: black;
+      padding: 15px;
+    }
+
+    .list-group-item a {
+      color: white;
+    }
+
+    .list-group-item {
+      background-color: black;
+      border: 1px solid orange;
+    }
+
+    .btn-orange {
+      color: #fff;
+      background-color: orange;
+      border-color: orange;
+    }
+
+    .btn-orange:hover,
+    .btn-orange:focus,
+    .btn-orange:active {
+      color: #fff;
+      background-color: darkorange;
+      border-color: darkorange;
+    }
+
+    .col-md-3 {
+      border: 1px solid orange;
+      border-radius: 10px;
+    }
+
+    .col-md-3.sidebar {
+      position: fixed;
+      margin-left: 5%;
+      margin-top: 5%;
+      height: 100vh;
+      width: 15%;
+      overflow-y: auto;
+    }
+
+    .col-md-3.sidebar ul {
+      position: sticky;
+
+    }
+
+    .col-md-3.shopping-cart {
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 300px;
+      overflow-y: auto;
+      width: 300px;
+    }
+
+    .col-md-6 {
+      margin-left: 15%;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .col-md-3,
+    .col-md-6 {
+      border: 1px solid orange;
+      border-radius: 10px;
+    }
+
+    .col-md-3.sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      overflow-y: auto;
+      max-height: 100vh; /* Set maximum height to viewport height */
+    }
+
+    .col-md-3.sidebar ul {
+      position: sticky;
+      top: 0;
+    }
+
+    .col-md-3.shopping-cart {
+      position: fixed;
+      right: 5%;
+      top: 5%;
+      overflow-y: auto;
+      max-height: 100vh; /* Set maximum height to viewport height */
+    }
+    .col-md-3.menu-categories {
+      position: fixed;
+      left: 5%;
+      top: 5%;
+      overflow-y: auto;
+      max-height: 100vh; /* Set maximum height to viewport height */
+    }
+
+    .col-md-3.menu-categories ul {
+      position: sticky;
+      top: 0;
+    }
+
+    .col-md-6 {
+      border: 1px solid orange;
+      border-radius: 10px;
+      margin-top: 10px; /* Adjust margin to create space between menu and content */
+      margin-left: 30%;
+    }
   </style>
 </head>
 
 <body>
 
-  <div class="container mt-4">
-    <div class="row">
-      <!-- Navigation Menu -->
-      <div class="col-md-3">
-        <h4>Menu Categories</h4>
-        <ul class="list-group">
-          <li class="list-group-item"><a href="#appetizers">Appetizers</a></li>
-          <li class="list-group-item"><a href="#pizzas">Pizzas</a></li>
-          <li class="list-group-item"><a href="#drinks">Drinks</a></li>
-          <!-- Add more categories as needed -->
-        </ul>
-      </div>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-3 menu-categories">
+      <h4>Menu Categories</h4>
+      <ul class="list-group">
+        <li class="list-group-item"><a href="#appetizers">Appetizers</a></li>
+        <li class="list-group-item"><a href="#pizzas">Pizzas</a></li>
+        <li class="list-group-item"><a href="#drinks">Drinks</a></li>
+      </ul>
+    </div>
 
-      <!-- Dishes List -->
-      <div class="col-md-6">
-        <h4 id="appetizers">Appetizers</h4>
-        <div class="dish-list">
-          <!-- Appetizers Table -->
-          <div class="table-responsive">
-            <table class="table">
-              <tbody>
-                <!-- Sample Appetizer 1 -->
-                <tr class="dish-row" data-name="Appetizer 1" data-price="5.99" data-image="path/to/appetizer1.jpg">
-                  <td>1</td>
-                  <td>Appetizer 1</td>
-                  <td>$5.99</td>
-                  <td>Description for Appetizer 1</td>
-                </tr>
-                <!-- Sample Appetizer 2 -->
-                <tr class="dish-row" data-name="Appetizer 2" data-price="7.99" data-image="path/to/appetizer2.jpg">
-                  <td>2</td>
-                  <td>Appetizer 2</td>
-                  <td>$7.99</td>
-                  <td>Description for Appetizer 2</td>
-                </tr>
-                <!-- Add more appetizers as needed -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <h4 id="pizzas">Pizzas</h4>
-        <div class="dish-list">
-          <!-- Pizzas Table -->
-          <div class="table-responsive">
-            <table class="table">
-              <tbody>
-                <!-- Sample Pizza 1 -->
-                <tr class="dish-row" data-name="Margherita Pizza" data-price="10.99" data-image="path/to/margherita.jpg">
-                  <td>1</td>
-                  <td>Margherita Pizza</td>
-                  <td>$10.99</td>
-                  <td>Fresh tomatoes, mozzarella, and basil</td>
-                </tr>
-                <!-- Sample Pizza 2 -->
-                <tr class="dish-row" data-name="Pepperoni Pizza" data-price="12.99" data-image="path/to/pepperoni.jpg">
-                  <td>2</td>
-                  <td>Pepperoni Pizza</td>
-                  <td>$12.99</td>
-                  <td>Pepperoni, mozzarella, and tomato sauce</td>
-                </tr>
-                <!-- Add more pizzas as needed -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <h4 id="drinks">Drinks</h4>
-        <div class="dish-list">
-          <!-- Drinks Table -->
-          <div class="table-responsive">
-            <table class="table">
-              <tbody>
-                <!-- Sample Drink 1 -->
-                <tr class="dish-row" data-name="Drink 1" data-price="2.99" data-image="path/to/drink1.jpg">
-                  <td>1</td>
-                  <td>Drink 1</td>
-                  <td>$2.99</td>
-                  <td>Description for Drink 1</td>
-                </tr>
-                <!-- Sample Drink 2 -->
-                <tr class="dish-row" data-name="Drink 2" data-price="1.99" data-image="path/to/drink2.jpg">
-                  <td>2</td>
-                  <td>Drink 2</td>
-                  <td>$1.99</td>
-                  <td>Description for Drink 2</td>
-                </tr>
-                <!-- Add more drinks as needed -->
-              </tbody>
-            </table>
-          </div>
+    <div class="col-md-6">
+      <h4 id="appetizers">Appetizers</h4>
+      <div class="dish-list">
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+            <!-- Sample Appetizer Rows -->
+            <tr class="dish-row" data-name="Appetizer 1" data-price="5.99" data-image="https://via.placeholder.com/150">
+              <td>1</td>
+              <td>Appetizer 1</td>
+              <td>$5.99</td>
+              <td>Description for Appetizer 1</td>
+            </tr>
+            <!-- Add more appetizers as needed -->
+            </tbody>
+          </table>
         </div>
       </div>
 
-      <!-- Dish Popup -->
-      <div class="dish-popup" id="dishPopup">
-        <img src="" alt="Dish Image" class="dish-image">
+      <h4 id="pizzas">Pizzas</h4>
+      <div class="dish-list">
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+            <!-- Sample Pizza Rows -->
+            <tr class="dish-row" data-name="Margherita Pizza" data-price="10.99" data-image="https://via.placeholder.com/150">
+              <td>1</td>
+              <td>Margherita Pizza</td>
+              <td>$10.99</td>
+              <td>Fresh tomatoes, mozzarella, and basil</td>
+            </tr>
+            <!-- Add more pizzas as needed -->
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <!-- Shopping Cart -->
-      <div class="col-md-3">
-        <h4>Shopping Cart</h4>
-        <ul class="list-group" id="cart">
-          <!-- Example Cart Items -->
-        </ul>
-        <hr>
-        <p>Total: $<span id="total">0.00</span></p>
-        <button class="btn btn-success mt-2" id="continueBtn">Continue with Order</button>
+      <h4 id="drinks">Drinks</h4>
+      <div class="dish-list">
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+            <!-- Sample Drink Rows -->
+            <tr class="dish-row" data-name="Drink 1" data-price="2.99" data-image="https://via.placeholder.com/150">
+              <td>1</td>
+              <td>Drink 1</td>
+              <td>$2.99</td>
+              <td>Description for Drink 1</td>
+            </tr>
+            <!-- Add more drinks as needed -->
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
+
+    <div class="col-md-3 shopping-cart">
+      <h4>Shopping Cart</h4>
+      <ul class="list-group" id="cart">
+        <!-- Example Cart Items -->
+      </ul>
+      <hr>
+      <p>Total: $<span id="total">0.00</span></p>
+      <button class="btn btn-orange mt-2" id="continueBtn">Continue with Order</button>
+    </div>
+
+    <!-- Dish Popup -->
+    <div class="dish-popup" id="dishPopup">
+      <img src="" alt="Dish Image" class="dish-image">
+    </div>
   </div>
+</div>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-  <script>
-    // Sample JavaScript to handle adding and removing items from the shopping cart
-    $(document).ready(function () {
-      var $dishPopup = $('#dishPopup');
+<script>
+  $(document).ready(function () {
+    var $dishPopup = $('#dishPopup');
 
-      // Function to show popup when clicking on dish name
-      $('.dish-row').click(function (e) {
-        var dishName = $(this).data('name');
-        var dishPrice = parseFloat($(this).data('price'));
-        var imagePath = $(this).data('image');
+    $('.dish-row').click(function (e) {
+      var dishName = $(this).data('name');
+      var dishPrice = parseFloat($(this).data('price'));
+      var imagePath = $(this).data('image');
 
-        // Add the dish to the shopping cart
-        $('#cart').append('<li class="list-group-item" data-price="' + dishPrice + '">' + dishName +
-          ' - $' + dishPrice.toFixed(2) + '<img src="https://static.vecteezy.com/system/resources/previews/000/630/479/non_2x/vector-trash-can-icon-symbol-illustration.jpg" class="remove-icon float-right" alt="Remove"></li>');
+      $('#cart').append('<li class="list-group-item" data-price="' + dishPrice + '">' + dishName +
+              ' - $' + dishPrice.toFixed(2) + '<img src="https://static.vecteezy.com/system/resources/previews/000/630/479/non_2x/vector-trash-can-icon-symbol-illustration.jpg" class="remove-icon float-right" alt="Remove"></li>');
 
-        updateTotal();
-      });
-
-      // Remove item from the shopping cart
-      $('#cart').on('click', '.remove-icon', function () {
-        $(this).closest('li').remove();
-        updateTotal();
-      });
-
-      $('#continueBtn').on('click', function () {
-        // Add your logic to proceed with the order
-        alert('Continue with the order! Total: $' + $('#total').text());
-      });
-
-      // Function to update the total amount in the shopping cart
-      function updateTotal() {
-        var total = 0;
-        $('#cart li').each(function () {
-          total += parseFloat($(this).data('price'));
-        });
-        $('#total').text(total.toFixed(2));
-      }
-
-      // Function to show popup when hovering over dish name
-      $('.dish-row').hover(function (e) {
-        var imagePath = $(this).data('image');
-        $dishPopup.find('.dish-image').attr('src', imagePath);
-        
-        // Calculate popup position considering scroll offset
-        var topOffset = e.pageY + 10 - $(window).scrollTop();
-        var leftOffset = e.pageX + 10;
-        
-        $dishPopup.css({
-          top: topOffset,
-          left: leftOffset
-        }).show();
-      }, function () {
-        // Hide the popup when not hovering
-        $dishPopup.hide();
-      });
-
-      // Hide the popup when mouse leaves the popup
-      $dishPopup.mouseleave(function () {
-        $dishPopup.hide();
-      });
-      
-      // Adjust popup position on window scroll
-      $(window).scroll(function() {
-        $dishPopup.hide();
-      });
+      updateTotal();
     });
-  </script>
+
+    $('#cart').on('click', '.remove-icon', function () {
+      $(this).closest('li').remove();
+      updateTotal();
+    });
+
+    $('#continueBtn').on('click', function () {
+      alert('Continue with the order! Total: $' + $('#total').text());
+    });
+
+    function updateTotal() {
+      var total = 0;
+      $('#cart li').each(function () {
+        total += parseFloat($(this).data('price'));
+      });
+      $('#total').text(total.toFixed(2));
+    }
+
+    $('.dish-row').hover(function (e) {
+      var imagePath = $(this).data('image');
+      $dishPopup.find('.dish-image').attr('src', imagePath);
+
+      var topOffset = e.pageY + 10 - $(window).scrollTop();
+      var leftOffset = e.pageX + 10;
+
+      $dishPopup.css({
+        top: topOffset,
+        left: leftOffset
+      }).show();
+    }, function () {
+      $dishPopup.hide();
+    });
+
+    $dishPopup.mouseleave(function () {
+      $dishPopup.hide();
+    });
+
+    $(window).scroll(function () {
+      $dishPopup.hide();
+    });
+  });
+</script>
 </body>
 
 </html>
