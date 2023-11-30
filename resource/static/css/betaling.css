@@ -1,0 +1,46 @@
+body {
+    background: black;
+    margin: 20px;
+}
+.rounded {
+    border-radius: 1em;
+}
+.nav-pills .nav-link {
+    color: #555;
+}
+.nav-pills .nav-link.active {
+    color: white;
+}
+input[type="radio"] {
+    margin-right: 5px;
+}
+.bold {
+    font-weight: bold;
+}
+#credit-card{
+    color: orange;
+}
+.card{
+    background-color: grey;
+}
+.shadow-sm{
+    background-color: orange;
+}
+.nav-link.active{
+    background-color: orange;
+}
+.btn-custom-orange {
+    color: #fff;
+    background-color: #ffA500; /* Baggrundsfarven (orange) */
+    border-color: #ffA500; /* Farven på kanten/border */
+}
+
+.btn-custom-orange:hover {
+    background-color: #e59400; /* Farve ved hover (mørkere orange) */
+    border-color: #e59400;
+}
+#bekraeftelseAlert {
+    display: none;
+}
+@media screen and (min-width: 768px) {
+}
