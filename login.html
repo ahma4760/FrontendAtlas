@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function() { // wait for DOM to load
+            document.getElementById('loginForm').addEventListener('submit', login)
+            document.getElementById('signupForm').addEventListener('submit', signup)
+            document.getElementById('deleteUserForm').addEventListener('submit', deleteUser)
+            document.getElementById('getSecretForm').addEventListener('submit', getSecret)
+        });
+
+        function apiRequest(endpoint, method, payload = null) {
+            const div = document.getElementById('container');
+            // Retrieve token from localStorage and add it to headers if available
+            const token = localStorage.getItem('user');
+            if (token) {
+                headers['Authorization'] = 'Bearer ' + token;
+                alert("token " + token)
+            }else {
+                alert("no token")
+                return
+            }
+            let requestOptions = {
+                method: method,
+                headers: {
+                    'content-type': 'application/json'
+                }
+            };
+
+            if (payload) {
+                requestOptions.body = JSON.stringify(payload);
+            }
+
+            fetch(`http://localhost:8080/${endpoint}`, requestOptions)
+                .then(function (res) {
+                    div.insertAdjacentHTML(
+                        'beforeend',
+                        `<span style="background-color: red">` + JSON.stringify(res) + `</code>`,
+                    );
+                    return res.json();
+                })
+                .then(function (data) {
+                    div.insertAdjacentHTML(
+                        'beforeend',
+                        `<span style="background-color: green">` + JSON.stringify(data) + `</code>`,
+                    );
+                    return data
+                })
+        }
+
+
+        // For signup
+        function signup(event) {
+            event.preventDefault();
+            let nameField = document.getElementById("nameField").value;
+            let passwordFieldSignup = document.getElementById("passwordFieldSignup").value;
+            let payload = {
+                username: nameField,
+                password: passwordFieldSignup
+            };
+            apiRequest("signup", "POST", payload);
+        }
+
+        // For login
+        function login(event) {
+            console.log("login() called")
+            event.preventDefault();
+            let usernameField = document.getElementById("usernameField").value;
+            let passwordField = document.getElementById("passwordField").value;
+            let payload = {
+                username: usernameField,
+                password: passwordField
+            };
+            if(apiRequest){console.log("api request there")} else {
+                console.log("NO api request there")
+                return
+            }
+            apiRequest("login", "POST", payload)
+                .then(function (res) {
+
+                    localStorage.setItem('user', JSON.stringify(res));
+                });
+        }
+
+        // For getSecret
+        function getSecret(event) {
+            event.preventDefault();
+            // Assuming no payload is required for getSecret
+            apiRequest("getSecret", "GET");
+        }
+
+        // For deleteUser
+        function deleteUser(event) {
+            event.preventDefault();
+            // If a payload is required for deleteUser, you can define it here
+            // For example, if you need a username for deletion:
+            let usernameField = document.getElementById("usernameDeleteField").value;
+            let payload = {
+                username: usernameField
+            };
+            apiRequest("deleteUser", "POST", payload);
+        }
+
+
+        function logout(event) {
+            event.preventDefault()
+            const div = document.getElementById('container');
+            localStorage.removeItem('user')
+            div.insertAdjacentHTML(
+                'beforeend',
+                `<span style="background-color: green">You have logged out.</code>`,
+            );
+        }
+
+    </script>
+</head>
+<body>
+<form id="signupForm">
+    <input type="text" value="Ole" id="nameField">
+    <input type="text" value="123" id="passwordFieldSignup">
+    <input type="submit" value="Sign up">
+</form>
+<br/>
+<form id="loginForm">
+    <input type="text" value="Ole" id="usernameField">
+    <input type="text" value="123" id="passwordField">
+    <input type="submit" value="Log in">
+</form>
+
+<form id="deleteUserForm">
+    <input type="text" placeholder="Username" id="usernameDeleteField">
+    <input type="submit" value="Delete user">
+</form>
+<form id="getSecretForm">
+    <input type="text" placeholder="some query" id="paramField">
+    <input type="submit" value="Get secret">
+</form>
+
+<form onsubmit="logout(event)">
+    <input type="submit" value="Log Out">
+</form>
+<div id="container">Initial Text</div>
+</body>
+</html>

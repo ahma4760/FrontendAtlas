@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<<<<<<< HEAD
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+=======
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Profile</title>
+    <link rel="stylesheet" href="../static/css/kunde.css">
+</head>
+<body>
+
+<div class="orange-outline">
+    <div class="info-box">
+        <h1 contenteditable="true">John Doe</h1>
+        <ul>
+            <li>Email: <span contenteditable="true">john@example.com</span></li>
+            <li>Phone: <span contenteditable="true">+1234567890</span></li>
+        </ul>
+    </div>
+    <div class="list-outline">
+    <div class="centered-list">
+        <h1>Orders</h1>
+        <ul>
+            <div class="col-md-4 col-xl-3">
+                <div class="card bg-c-green order-card">
+                    <div class="card-block">
+                        <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>Margarita Pizza</span></h2>
+                        <p class="m-b-0">Order status<span class="f-right">In Progress</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-xl-3">
+                <div class="card bg-c-green order-card">
+                    <div class="card-block">
+                        <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>Margarita Pizza</span></h2>
+                        <p class="m-b-0">Order status<span class="f-right">In Progress</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-xl-3">
+                <div class="card bg-c-green order-card">
+                    <div class="card-block">
+                        <h2 class="text-right"><i class="fa fa-rocket f-left"></i><span>Margarita Pizza</span></h2>
+                        <p class="m-b-0">Order status<span class="f-right">In Progress</span></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more list items as needed -->
+        </ul>
+    </div>
+        <!--Punch card -->
+    </div>
+    <div class="stamp-card">
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+        <div class="stamp"></div>
+    </div>
+
+    <button id="changeColorButton">Change Color</button>
+
+    <script>
+        <!-- JS For Punch card -->
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentStampIndex = 0;
+            var stamps = document.querySelectorAll('.stamp');
+
+            document.getElementById('changeColorButton').addEventListener('click', function () {
+                stamps[currentStampIndex].classList.toggle('white');
+                currentStampIndex = (currentStampIndex + 1) % stamps.length;
+            });
+        });
+
+
+
+
+
+    </script>
+
+
+
+</div>
+</body>
+</html>
+>>>>>>> Kunde_profil/orderlist
