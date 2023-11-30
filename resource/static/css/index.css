@@ -71,17 +71,18 @@ body {
 .pizza-list li p:first-child{
     font-size: 14px;
     font-weight: bold;
+    padding: -4px;
     color: white;
-    transform: translate(-11%,-1%);
+    transform: translate(-12%,-30%);
     cursor: pointer;
 }
 
 .pizza-list li p:last-child{
-    font-size: 10px;
+    font-size: 13px;
     font-weight: bold;
     color: black;
-    padding: 1px;
-    transform: translate(-11%,-1%);
+    padding: -10px;
+    transform: translate(-12%,-400%);
     cursor: pointer;
 }
 
