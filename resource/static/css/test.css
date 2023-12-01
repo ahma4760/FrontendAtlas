@@ -1,0 +1,149 @@
+body {
+    background-color: black;
+    color: #fff;
+    transition: background-color 0.5s ease;
+    border: 1px solid orange;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.dish-popup {
+    position: fixed;
+    display: none;
+    max-width: 200px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px 0px #000;
+    z-index: 999; /* Ensure the popup is above other elements */
+}
+
+.dish-image {
+    max-width: 100%;
+    max-height: 150px;
+}
+
+.dish-row {
+    transition: transform 0.2s;
+    color: white;
+}
+
+.dish-row:hover {
+    cursor: pointer;
+    background-color: orange;
+    transform: scale(1.05);
+    color: #1a1a1a;
+}
+
+.remove-icon {
+    max-width: 20px;
+    cursor: pointer;
+}
+
+.container {
+    background-color: black;
+    padding: 15px;
+}
+
+.list-group-item a {
+    color: white;
+}
+
+.list-group-item {
+    background-color: black;
+    border: 1px solid orange;
+}
+
+.btn-orange {
+    color: #fff;
+    background-color: orange;
+    border-color: orange;
+}
+
+.btn-orange:hover,
+.btn-orange:focus,
+.btn-orange:active {
+    color: #fff;
+    background-color: darkorange;
+    border-color: darkorange;
+}
+
+.col-md-3 {
+    border: 1px solid orange;
+    border-radius: 10px;
+}
+
+.col-md-3.sidebar {
+    position: fixed;
+    margin-left: 5%;
+    margin-top: 5%;
+    height: 100vh;
+    width: 15%;
+    overflow-y: auto;
+}
+
+.col-md-3.sidebar ul {
+    position: sticky;
+
+}
+
+.col-md-3.shopping-cart {
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 300px;
+    overflow-y: auto;
+    width: 300px;
+}
+
+.col-md-6 {
+    margin-left: 15%;
+    height: 100vh;
+    overflow-y: auto;
+}
+.col-md-3,
+.col-md-6 {
+    border: 1px solid orange;
+    border-radius: 10px;
+}
+
+.col-md-3.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    max-height: 100vh; /* Set maximum height to viewport height */
+}
+
+.col-md-3.sidebar ul {
+    position: sticky;
+    top: 0;
+}
+
+.col-md-3.shopping-cart {
+    position: fixed;
+    right: 5%;
+    top: 5%;
+    overflow-y: auto;
+    max-height: 100vh; /* Set maximum height to viewport height */
+}
+.col-md-3.menu-categories {
+    position: fixed;
+    left: 5%;
+    top: 5%;
+    overflow-y: auto;
+    max-height: 100vh; /* Set maximum height to viewport height */
+}
+
+.col-md-3.menu-categories ul {
+    position: sticky;
+    top: 0;
+}
+
+.col-md-6 {
+    border: 1px solid orange;
+    border-radius: 10px;
+    margin-top: 10px; /* Adjust margin to create space between menu and content */
+    margin-left: 30%;
+}
