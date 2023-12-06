@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee's only</title>
+    <link rel="stylesheet" href="../static/css/employeeStylesheetWebpage.css">
+    <link rel="stylesheet" href="../static/css/employeeStylesheetOrder.css">
+</head>
+<body>
+
+<div class="header">
+    <div class="logout">Logout</div>
+    <div class="logo">
+        <img src="../photo/atlas-logo.png" alt="logo" style="height: 55px; width: 55px">
+    </div>
+</div>
+
+<!-- Container for left side -->
+<div class="container">
+    <div class="column">
+        <h1>Modtaget Ordre</h1>
+        <!---Pizza order begins --->
+        <div class="order-container">
+            <div class="left-container">
+                <div class="timestamp">Blev modtaget for: <span id="timeElapsed1">...</span></div>
+                <div class="order-info">
+                    <div class="order-number">
+                        <table>
+                            <td>Ordre nr.</td>
+                            <td>Navn</td>
+                        </table>
+                    </div>
+                    <div class="customer-info">
+                        <div>Telefon nummer</div>
+                        <div>Gade</div>
+                        <div>By</div>
+                        <div>mail adresse</div>
+                    </div>
+                    <div class="ordered-pizzas">
+                        <li>Pizza goes here</li>
+                    </div>
+                    <div class="total-price">
+                        <p>Total Price: $25.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="confirmButton">Confirm</button>
+                <button class="declineButton">Decline</button>
+            </div>
+        </div>
+        <!---Pizza order ends --->
+    </div>
+
+    <!-- Container for right side -->
+    <div class="column">
+        <h1>Accepteret Ordre</h1>
+        <!---Pizza order begins --->
+        <div class="order-container">
+            <div class="left-container">
+                <div class="timestamp">Har været i gang i: <span id="timeElapsed2">...</span></div>
+                <div class="order-info">
+                    <div class="order-number">
+                        <table>
+                            <td>Ordre nr.</td>
+                            <td>Navn</td>
+                        </table>
+                    </div>
+                    <div class="customer-info">
+                        <div>Telefon nummer</div>
+                        <div>Gade</div>
+                        <div>By</div>
+                        <div>mail adresse</div>
+                    </div>
+                    <div class="ordered-pizzas">
+                        <li>Pizza goes here</li>
+
+                    </div>
+                    <div class="total-price">
+                        <p>Total Price: $25.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="confirmButton">Done</button>
+            </div>
+        </div>
+        <!---Pizza order ends --->
+</div>
+
+<script src="../javascript/employeeJavascriptPendingOrder.js"></script>
+<script src="../javascript/employeeJavascriptWebpage.js"></script>
+
+</body>
+</html>

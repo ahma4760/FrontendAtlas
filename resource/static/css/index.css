@@ -5,11 +5,12 @@ body {
 }
 
 .header {
+    display: flex;
     background-color: #333;
     color: orange;
     text-align: center;
-    padding: 20px;
-    margin-top: 20px;
+    /*padding: 20px;
+    margin-top: 20px;*/
 }
 
 .main-container {
@@ -92,3 +93,24 @@ body {
     padding: 20px;
 }
 
+.logo{
+    display: flex;
+}
+
+/*Login knapper*/
+.loginButton {
+    display: flex;
+    padding: 5px 25px;
+    background-color: orange;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginButton:hover{
+    background-color: #b67700;
+    color: black;
+}
