@@ -51,4 +51,25 @@ $(document).ready(function () {
     $(window).scroll(function () {
         $dishPopup.hide();
     });
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var footer = document.querySelector(".sticky-footer");
+
+        window.addEventListener("scroll", function () {
+            // Calculate how far the user has scrolled
+            var scrollPosition = window.scrollY || document.documentElement.scrollTop;
+
+            // Calculate the maximum scroll height
+            var maxScrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+            // Show or hide the footer based on scroll position
+            footer.style.bottom = (scrollPosition >= maxScrollHeight) ? "-" + footer.clientHeight + "px" : "0";
+        });
+    });
+
+
+
+
+
 });

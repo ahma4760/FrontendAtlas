@@ -1,12 +1,12 @@
 body {
-    background-color: black;
-    color: #fff;
-    transition: background-color 0.5s ease;
-    border: 1px solid orange;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+    background-color: black !important;
+    color: #fff !important;
+    transition: background-color 0.5s ease !important;
+    border: 1px solid orange !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 100vh !important;
 }
 
 .dish-popup {
@@ -70,8 +70,11 @@ body {
 }
 
 .col-md-3 {
-    border: 1px solid orange;
-    border-radius: 10px;
+    outline: 8px ridge orange;
+    border-radius: 2rem;
+    margin-top: 100px;
+
+    overflow: auto;
 }
 
 .col-md-3.sidebar {
@@ -88,24 +91,18 @@ body {
 
 }
 
-.col-md-3.shopping-cart {
-    position: fixed;
-    right: 0;
-    top: 0;
-    height: 300px;
-    overflow-y: auto;
-    width: 300px;
-}
 
 .col-md-6 {
     margin-left: 15%;
     height: 100vh;
     overflow-y: auto;
 }
-.col-md-3,
-.col-md-6 {
-    border: 1px solid orange;
-    border-radius: 10px;
+.col-md-3{
+    outline: 8px ridge orange;
+    border-radius: 2rem;
+    margin-top: 100px;
+    width: 300px;
+    max-height: 600px;
 }
 
 .col-md-3.sidebar {
@@ -122,18 +119,25 @@ body {
 }
 
 .col-md-3.shopping-cart {
+    outline: 8px ridge orange;
+    border-radius: 2rem;
+    margin-top: 100px;
+    overflow: auto;
     position: fixed;
     right: 5%;
     top: 5%;
-    overflow-y: auto;
-    max-height: 100vh; /* Set maximum height to viewport height */
+    height: 600px;
 }
 .col-md-3.menu-categories {
+    outline: 8px ridge orange;
+    border-radius: 2rem;
+    margin-top: 100px;
+    overflow: auto;
     position: fixed;
     left: 5%;
     top: 5%;
-    overflow-y: auto;
-    max-height: 100vh; /* Set maximum height to viewport height */
+    height: 600px;
+
 }
 
 .col-md-3.menu-categories ul {
@@ -142,8 +146,50 @@ body {
 }
 
 .col-md-6 {
-    border: 1px solid orange;
-    border-radius: 10px;
-    margin-top: 10px; /* Adjust margin to create space between menu and content */
-    margin-left: 30%;
+    outline: 8px ridge orange;
+    border-radius: 2rem;
+
+
+    margin-left: 25%;
+
+    max-width: 80%;
 }
+
+/* Add styles for the sticky footer */
+.sticky-footer {
+    position: fixed;
+    bottom: 0; /* Show the footer initially at the bottom of the viewport */
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    transition: bottom 0.3s ease; /* Add a smooth transition effect */
+}
+
+h4 {
+    margin-top: 20px;
+}
+
+/* Custom styles for the logo */
+.navbar {
+    background-color: black !important;
+    border: 2px solid orange !important;
+}
+.navbar-brand{
+    color: white!important;
+}
+
+.navbar-light .navbar-brand img {
+    max-height: 40px !important; /* Adjust the height as needed */
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: white !important;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: darkorange !important;
+}
+
