@@ -9,6 +9,14 @@ body {
     min-height: 100vh;
 }
 
+.dish-list {
+    overflow: hidden;
+}
+
+.table {
+    overflow: hidden;
+}
+
 .dish-popup {
     position: fixed;
     display: none;
@@ -27,6 +35,7 @@ body {
 .dish-row {
     transition: transform 0.2s;
     color: white;
+    overflow: hidden;
 }
 
 .dish-row:hover {
@@ -75,32 +84,32 @@ body {
 }
 
 .col-md-3.sidebar {
-    position: fixed;
+    /*position: fixed;
     margin-left: 5%;
     margin-top: 5%;
     height: 100vh;
-    width: 15%;
+    width: 15%;*/
     overflow-y: auto;
 }
 
 .col-md-3.sidebar ul {
-    position: sticky;
+    /*position: sticky;*/
 
 }
 
 .col-md-3.shopping-cart {
-    position: fixed;
+    /*position: fixed;
     right: 0;
-    top: 0;
+    top: 0;*/
     height: 300px;
     overflow-y: auto;
     width: 300px;
 }
 
 .col-md-6 {
-    margin-left: 15%;
+    /*margin-left: 15%;
     height: 100vh;
-    overflow-y: auto;
+    overflow-y: auto;*/
 }
 .col-md-3,
 .col-md-6 {
@@ -109,41 +118,261 @@ body {
 }
 
 .col-md-3.sidebar {
-    position: fixed;
+    /*position: fixed;
     left: 0;
-    top: 0;
+    top: 0;*/
     overflow-y: auto;
     max-height: 100vh; /* Set maximum height to viewport height */
 }
 
 .col-md-3.sidebar ul {
-    position: sticky;
-    top: 0;
+    /*position: sticky;
+    top: 0;*/
 }
 
 .col-md-3.shopping-cart {
-    position: fixed;
+    /*position: fixed;
     right: 5%;
-    top: 5%;
+    top: 5%;*/
     overflow-y: auto;
     max-height: 100vh; /* Set maximum height to viewport height */
 }
 .col-md-3.menu-categories {
-    position: fixed;
+    /*position: fixed;
     left: 5%;
-    top: 5%;
+    top: 5%;*/
     overflow-y: auto;
     max-height: 100vh; /* Set maximum height to viewport height */
 }
 
 .col-md-3.menu-categories ul {
-    position: sticky;
-    top: 0;
+    /*position: sticky;
+    top: 0;*/
 }
 
 .col-md-6 {
     border: 1px solid orange;
     border-radius: 10px;
-    margin-top: 10px; /* Adjust margin to create space between menu and content */
-    margin-left: 30%;
+    /*margin-top: 10px; /* Adjust margin to create space between menu and content */
+    /*margin-left: 30%;*/
+}
+
+/*Header*/
+
+.transparent-header {
+    background-color: transparent;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.transparent-header.navbar-dark {
+    background-color: black;
+    color: white;
+}
+
+.navbar-nav .nav-item:hover .nav-link {
+    /*transition: border-bottom 0.5s;
+    color: white;*/
+    border-bottom: 2px solid #ffa500;
+}
+
+.navbar-nav .nav-link {
+    color: white;
+    border-bottom: 2px solid transparent;
+    transition: 0.3s;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom styles for the cover image */
+.cover {
+    background-image: url('https://atlaskebab.dk/wp-content/uploads/2021/08/kebab-2451112_1920-1.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Popup styles */
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url('img/bowlingball.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 20px;
+    border-radius: 10px;
+    width: 95%;
+    max-width: 800px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: whitesmoke; /* Text color */
+}
+
+
+.popup-content h2 {
+    font-size: 24px; /* Heading font size */
+    color: #fff; /* Heading text color */
+}
+
+.popup-content label {
+    color: white; /* Label text color */
+}
+
+.popup-content input[type="text"],
+.popup-content input[type="number"],
+.popup-content select,
+.popup-content input[type="date"],
+.popup-content input[type="time"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.popup-content button {
+    background-color: #007BFF; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.popup-content button:hover {
+    background-color: #0056b3; /* Button background color on hover */
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+}
+
+/* Style for the submit button */
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Style for form inputs and labels */
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+/* Additional styling for activity options if needed */
+.activity-option {
+    /* Add your custom styles here */
+}
+
+/* Activity options */
+.activity-options {
+    display: flex;
+    justify-content: space-between;
+}
+
+.activity-option {
+    flex-basis: calc(20% - 2px); /* Three activities in a row with spacing */
+    padding: 40px;
+}
+
+/* Payment modal */
+
+
+#myModal .rounded {
+    border-radius: 1em;
+}
+#myModal .nav-pills .nav-link {
+    color: #555;
+}
+#myModal .nav-pills .nav-link.active {
+    color: white;
+}
+
+#myModal input[type="radio"] {
+    margin-right: 5px;
+}
+#myModal .bold {
+    font-weight: bold;
+}
+#myModal #credit-card{
+    color: orange;
+}
+#myModal .card{
+    background-color: grey;
+}
+#myModal .shadow-sm{
+    background-color: orange;
+}
+#myModal .nav-link.active{
+    background-color: orange;
+}
+#myModal .btn-custom-orange {
+    color: #fff;
+    background-color: #ffA500; /* Baggrundsfarven (orange) */
+    border-color: #ffA500; /* Farven på kanten/border */
+}
+
+#myModal .btn-custom-orange:hover {
+    background-color: #e59400; /* Farve ved hover (mørkere orange) */
+    border-color: #e59400;
+}
+#bekraeftelseAlert {
+    display: none;
+}
+
+#myModal .col-md-6 {
+    border:none;
+}
+
+#myModal .modal-title {
+    color:black;
 }

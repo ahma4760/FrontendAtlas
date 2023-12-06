@@ -17,10 +17,6 @@ $(document).ready(function () {
         updateTotal();
     });
 
-    $('#continueBtn').on('click', function () {
-        alert('Continue with the order! Total: $' + $('#total').text());
-    });
-
     function updateTotal() {
         var total = 0;
         $('#cart li').each(function () {

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="resource/static/css/test.css">
+
+  <title>Pizza Place Menu</title>
+
+</head>
+
+<body>
+
+<!-- Payment Modal -->
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h2 class="modal-title">Betal her</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" style="border:none; background-color:transparent;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+</svg></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="row">
+                <div class="mx-auto">
+                    <div class="kort">
+                        <div class="card-header">
+                            <div class="shadow-sm">
+                                <!-- Credit card form tabs -->
+                                <ul role="tablist" class="nav shadow-sm rounded nav-fill">
+                                    <li class="nav-item">
+                                        <a data-toggle="pill" href="#credit-card" class="nav-link active text-white"> <i class="fas fa-credit-card mr-2"></i>Kredit kort </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- End -->
+
+                            <!-- Credit card form content -->
+                            <div class="tab-content">
+                                <!-- credit card info-->
+                                <div id="credit-card" class="tab-pane fade show active pt-3">
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <label for="username">
+                                                <h6>Kort Holder</h6>
+                                            </label>
+                                            <input type="text" name="username" placeholder="Kamilla Skov" required class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cardNumber">
+                                                <h6>Kort Nummer</h6>
+                                            </label>
+                                            <div class="input-group">
+                                                <input type="text" id="cardNumberInput" name="cardNumber" placeholder="**** **** **** 0098" class="form-control" required maxlength="12" oninput="validateCardNumber()" />
+                                                <div class="input-group-append">
+                          <span class="input-group-text text-muted">
+                            <i class="fab fa-cc-visa mx-1"></i>
+                            <i class="fab fa-cc-mastercard mx-1"></i>
+                            <i class="fab fa-cc-amex mx-1"></i>
+                          </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>
+                <span class="hidden-xs">
+                    <h6>Udløbsdato</h6>
+                </span>
+                                                    </label>
+                                                    <div class="input-group">
+                                                        <input type="text" placeholder="Måned" id="monthInput" class="form-control" required pattern="\d+" />
+                                                        <input type="number" placeholder="År" id="yearInput" class="form-control" required min="2024" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-4">
+                                                    <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
+                                                        <h6> CVV <i class="fa fa-question-circle d-inline"></i></h6>
+                                                    </label>
+                                                    <input type="number" placeholder="345" required class="form-control" id="cvvInput"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <button type="button" class="btn btn-custom-orange btn-block" onclick="bekraeftBetaling()">Bekræft Betaling</button>
+                                            <div id="bekraeftelseAlert" class="alert alert-success"></div>
+                                        </div>
+
+
+                                        <script>
+                                            function bekraeftBetaling() {
+                                                // Få fat i alert-elementet
+                                                let alertElement = document.getElementById('bekraeftelseAlert');
+
+                                                // Indsæt den ønskede besked i alert-elementet
+                                                alertElement.textContent = "Sådan! Din betaling er modtaget.";
+
+                                                // Vis alerten
+                                                alertElement.style.display = 'block';
+                                            }
+
+                                            // Kun tal, ingen bogstaver i kortnummer
+                                            function validateCardNumber() {
+                                                let cardNumberInput = document.getElementById('cardNumberInput');
+                                                cardNumberInput.value = cardNumberInput.value.replace(/\D/g, ''); // Fjern alle ikke-tal tegn
+                                            }
+
+                                            document.getElementById('monthInput').addEventListener('input', function () {
+                                                validateMonth();
+                                            });
+
+                                            document.getElementById('yearInput').addEventListener('input', function () {
+                                                validateYear();
+                                            });
+
+                                            document.getElementById('cvvInput').addEventListener('input', function () {
+                                                let cvv = this.value.trim();
+
+                                                if (cvv.length > 3) {
+                                                    this.value = cvv.slice(0, 3); // Trim overskydende cifre
+                                                }
+                                            });
+
+                                            function validateMonth() {
+                                                let monthInput = document.getElementById('monthInput');
+                                                let numericValue = parseInt(monthInput.value, 10) || 1; // Konverter til heltal eller brug 1 som standard
+                                                if (numericValue < 1) {
+                                                    monthInput.value = 1;
+                                                } else if (numericValue > 12) {
+                                                    monthInput.value = 12;
+                                                }
+                                            }
+
+                                            function validateYear() {
+                                                let yearInput = document.getElementById('yearInput');
+                                                let numericValue = parseInt(yearInput.value, 10) || 2024; // Konverter til heltal eller brug 2024 som standard
+
+                                                // Tjek om indtastede år er mindre end 2024 eller har mere end 4 cifre
+                                                if (numericValue < 2024 || yearInput.value.length > 4) {
+                                                    yearInput.value = 2024;
+                                                }
+                                            }
+                                        </script>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Afbryd</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Navbar -->
+<header class="transparent-header">
+  <nav class="navbar navbar-expand-lg ">
+      <a class="navbar-brand" href="#"><img src="resource/photo/atlas-logo.png" alt="Logo" width="60px" ></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="#menukort">Bestil mad</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#Login">Log ind</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#om-os">Om os</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#opening-hrs">Åbningstider</a>
+              </li>
+          </ul>
+      </div>
+  </nav>
+</header>
+<!-- Cover Section -->
+    <section class="cover">
+        <h1>Velkommen til Atlas Pizza og Kebab</h1>
+        <p>Værdi for pengene, madoplevelser, service, 65 siddepladser</p>
+    </section>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <h1 id="menukort">Menukort</h1>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-3 menu-categories">
+      <h4>Menu Categories</h4>
+      <ul class="list-group">
+        <li class="list-group-item"><a href="#appetizers">Appetizers</a></li>
+        <li class="list-group-item"><a href="#pizzas">Pizzas</a></li>
+        <li class="list-group-item"><a href="#drinks">Drinks</a></li>
+      </ul>
+    </div>
+
+    <div class="col-md-6">
+      <h4 id="appetizers">Appetizers</h4>
+      <div class="dish-list">
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+            <!-- Sample Appetizer Rows -->
+            <tr class="dish-row" data-name="Appetizer 1" data-price="5.99" data-image="https://via.placeholder.com/150">
+              <td>1</td>
+              <td>Appetizer 1</td>
+              <td>$5.99</td>
+              <td>Description for Appetizer 1</td>
+            </tr>
+            <!-- Add more appetizers as needed -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h4 id="pizzas">Pizzas</h4>
+      <div class="dish-list">
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+            <!-- Sample Pizza Rows -->
+            <tr class="dish-row" data-name="Margherita Pizza" data-price="10.99" data-image="https://via.placeholder.com/150">
+              <td>1</td>
+              <td>Margherita Pizza</td>
+              <td>$10.99</td>
+              <td>Fresh tomatoes, mozzarella, and basil</td>
+            </tr>
+            <tr class="dish-row" data-name="Margherita Pizza" data-price="10.99" data-image="https://via.placeholder.com/150">
+              <td>1</td>
+              <td>Margherita Pizza</td>
+              <td>$10.99</td>
+              <td>Fresh tomatoes, mozzarella, and basil</td>
+            </tr>
+            <tr class="dish-row" data-name="Margherita Pizza" data-price="10.99" data-image="https://via.placeholder.com/150">
+              <td>1</td>
+              <td>Margherita Pizza</td>
+              <td>$10.99</td>
+              <td>Fresh tomatoes, mozzarella, and basil</td>
+            </tr>
+            <tr class="dish-row" data-name="Margherita Pizza" data-price="10.99" data-image="https://via.placeholder.com/150">
+              <td>1</td>
+              <td>Margherita Pizza</td>
+              <td>$10.99</td>
+              <td>Fresh tomatoes, mozzarella, and basil</td>
+            </tr>
+            <tr class="dish-row" data-name="Margherita Pizza" data-price="10.99" data-image="https://via.placeholder.com/150">
+              <td>1</td>
+              <td>Margherita Pizza</td>
+              <td>$10.99</td>
+              <td>Fresh tomatoes, mozzarella, and basil</td>
+            </tr>
+            <tr class="dish-row" data-name="Margherita Pizza" data-price="10.99" data-image="https://via.placeholder.com/150">
+              <td>1</td>
+              <td>Margherita Pizza</td>
+              <td>$10.99</td>
+              <td>Fresh tomatoes, mozzarella, and basil</td>
+            </tr>
+            <tr class="dish-row" data-name="Margherita Pizza" data-price="10.99" data-image="https://via.placeholder.com/150">
+              <td>1</td>
+              <td>Margherita Pizza</td>
+              <td>$10.99</td>
+              <td>Fresh tomatoes, mozzarella, and basil</td>
+            </tr>
+            <tr class="dish-row" data-name="Margherita Pizza" data-price="10.99" data-image="https://via.placeholder.com/150">
+              <td>1</td>
+              <td>Margherita Pizza</td>
+              <td>$10.99</td>
+              <td>Fresh tomatoes, mozzarella, and basil</td>
+            </tr>
+            <tr class="dish-row" data-name="Margherita Pizza" data-price="10.99" data-image="https://via.placeholder.com/150">
+              <td>1</td>
+              <td>Margherita Pizza</td>
+              <td>$10.99</td>
+              <td>Fresh tomatoes, mozzarella, and basil</td>
+            </tr>
+            <tr class="dish-row" data-name="Margherita Pizza" data-price="10.99" data-image="https://via.placeholder.com/150">
+              <td>1</td>
+              <td>Margherita Pizza</td>
+              <td>$10.99</td>
+              <td>Fresh tomatoes, mozzarella, and basil</td>
+            </tr>
+            <tr class="dish-row" data-name="Margherita Pizza" data-price="10.99" data-image="https://via.placeholder.com/150">
+              <td>1</td>
+              <td>Margherita Pizza</td>
+              <td>$10.99</td>
+              <td>Fresh tomatoes, mozzarella, and basil</td>
+            </tr>
+            <!-- Add more pizzas as needed -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <h4 id="drinks">Drinks</h4>
+      <div class="dish-list">
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+            <!-- Sample Drink Rows -->
+            <tr class="dish-row" data-name="Drink 1" data-price="2.99" data-image="https://via.placeholder.com/150">
+              <td>1</td>
+              <td>Drink 1</td>
+              <td>$2.99</td>
+              <td>Description for Drink 1</td>
+            </tr>
+            <!-- Add more drinks as needed -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 shopping-cart">
+      <h4>Shopping Cart</h4>
+      <ul class="list-group" id="cart">
+        <!-- Example Cart Items -->
+      </ul>
+      <hr>
+      <p>Total: $<span id="total">0.00</span></p>
+      <button class="btn btn-orange mt-2" id="continueBtn" data-bs-toggle="modal" data-bs-target="#myModal">Continue with Order</button>
+    </div>
+
+    <!-- Dish Popup -->
+    <div class="dish-popup" id="dishPopup">
+      <img src="" alt="Dish Image" class="dish-image">
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 id="om-os">Om os</h1>
+      <p>
+        Hos Atlas Pizza Kebab på Tomsgårdsvej 32 København NV med 65 siddepladser får du lækker mad serveret med et smil. Menukortet er fyldt med lækre retter, og du kan blandt andet vælge mellem Burger, Dürüm, Grillmad, Kødretter, Kebab, Pizza, Salat og Sandwich. Maden bliver tilberedt med sans for kvalitet og den gode smag, og Atlas Pizza Kebab stræber til enhver tid, at du får en god madoplevelse. Atlas Pizza Kebab tilbyder takeaway til afhentning. Vil du gerne bestille bord, er der også mulighed for det, så undgår du ventetid, når du ankommer. Der er frit valg mellem alle retter på menukortet, og du kan få Aftensmad, Frokost. Du kan nyde godt af følgende faciliteter hos Atlas Pizza Kebab er Børneretter, Halal Mad.
+      </p>
+    </div>
+    <div class="col">
+      <div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-10733cfb" data-id="10733cfb" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-widget-wrap elementor-element-populated">
+								<div class="elementor-element elementor-element-d56405b elementor-widget elementor-widget-google_maps" data-id="d56405b" data-element_type="widget" data-widget_type="google_maps.default">
+				<div class="elementor-widget-container">
+			<style>/*! elementor - v3.15.0 - 20-08-2023 */
+.elementor-widget-google_maps .elementor-widget-container{overflow:hidden}.elementor-widget-google_maps .elementor-custom-embed{line-height:0}.elementor-widget-google_maps iframe{height:300px}</style>		<div class="elementor-custom-embed">
+			<iframe loading="lazy" src="https://maps.google.com/maps?q=Atlas%20Pizza%20Kebab&amp;t=m&amp;z=13&amp;output=embed&amp;iwloc=near" title="Atlas Pizza Kebab" aria-label="Atlas Pizza Kebab"></iframe>
+		</div>
+				</div>
+				</div>
+					</div>
+		</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <h1 id="kontakt">Kontakt os</h1>
+          <p>
+            Atlas pizza kebab<br />
+    Tomsgårdsvej 32 NV 2400<br />
+    Tlf. 38885010<br />
+    Mail. <a href="mailto:info@atlaskebab.dk">info@atlaskebab.dk</a>
+          </p>
+        </div>
+        <div class="col">
+          <figure class="wp-block-image size-full is-resized" id="https://www.findsmiley.dk/551106"><a href="https://www.findsmiley.dk/551106"><img loading="lazy" decoding="async" src="https://atlaskebab.dk/wp-content/uploads/2021/08/elite-smiley_large-4.png" alt="" class="wp-image-263" width="113" height="78"></a></figure>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <h1 class="opening-hrs">Åbningstider</h1>
+      <p>
+        MANDAG / TORSDAG 11:00 - 23:00<br />
+FREDAG / LØRDAG 11:00 - 24:00<br />
+SØNDAG / HELLIGDAGE 12:00 - 23:00
+      </p>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="resource/javascript/test.js"></script>
+</body>
+
+</html>
