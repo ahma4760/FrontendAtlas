@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Get references to the necessary elements
-    const showLoginButton = document.querySelector("#show-login");
-    const popup = document.querySelector(".popup");
-    const closeBtn = document.querySelector(".popup .close-btn");
-    const overlay = document.querySelector("#overlay");
+    const showLoginButton = document.querySelector("#login-popup__show-login");
+    const popup = document.querySelector(".login-popup__popup");
+    const closeBtn = document.querySelector(".login-popup__popup .login-popup__close-btn");
+    const overlay = document.querySelector("#login-popup__overlay");
 
     // Function to show the popup and overlay
     function showPopup() {
