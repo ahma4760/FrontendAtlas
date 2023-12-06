@@ -323,3 +323,56 @@ html {
     flex-basis: calc(20% - 2px); /* Three activities in a row with spacing */
     padding: 40px;
 }
+
+/* Payment modal */
+
+
+#myModal .rounded {
+    border-radius: 1em;
+}
+#myModal .nav-pills .nav-link {
+    color: #555;
+}
+#myModal .nav-pills .nav-link.active {
+    color: white;
+}
+
+#myModal input[type="radio"] {
+    margin-right: 5px;
+}
+#myModal .bold {
+    font-weight: bold;
+}
+#myModal #credit-card{
+    color: orange;
+}
+#myModal .card{
+    background-color: grey;
+}
+#myModal .shadow-sm{
+    background-color: orange;
+}
+#myModal .nav-link.active{
+    background-color: orange;
+}
+#myModal .btn-custom-orange {
+    color: #fff;
+    background-color: #ffA500; /* Baggrundsfarven (orange) */
+    border-color: #ffA500; /* Farven på kanten/border */
+}
+
+#myModal .btn-custom-orange:hover {
+    background-color: #e59400; /* Farve ved hover (mørkere orange) */
+    border-color: #e59400;
+}
+#bekraeftelseAlert {
+    display: none;
+}
+
+#myModal .col-md-6 {
+    border:none;
+}
+
+#myModal .modal-title {
+    color:black;
+}
