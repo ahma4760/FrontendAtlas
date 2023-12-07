@@ -11,9 +11,142 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="resource/static/css/test.css">
     <link rel="stylesheet" href="resource/static/css/indexStylesheetPopup.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
   <title>Pizza Place Menu</title>
+    <style media="screen">
+        *,
+        *:before,
+        *:after{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: #080710;
+        }
+        .background{
+            width: 430px;
+            height: 520px;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            left: 50%;
+            top: 50%;
+            z-index: -1; /* Add this line */
+        }
+        .background .shape{
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+            z-index: -1; /* Add this line */
+        }
+        .shape:first-child{
+            background: linear-gradient(
+                    #1845ad,
+                    #23a2f6
+            );
+            left: -80px;
+            top: -80px;
+        }
+        .shape:last-child{
+            background: linear-gradient(
+                    to right,
+                    #ff512f,
+                    #f09819
+            );
+            right: -30px;
+            bottom: -80px;
+        }
+        form{
+            height: 520px;
+            width: 400px;
+            background-color: rgba(255,255,255,0.13);
+            position: absolute;
+            transform: translate(-50%,-50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 40px rgba(8,7,16,0.6);
+            padding: 50px 35px;
+            z-index: 1; /* Add this line */
+        }
+        form *{
+            font-family: 'Poppins',sans-serif;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
+        }
+        form h3{
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+        }
 
+        label{
+            display: block;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        input{
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(255,255,255,0.07);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+        ::placeholder{
+            color: #e5e5e5;
+        }
+        button{
+            margin-top: 20px;
+            width: 100%;
+            background-color: #ffffff;
+            color: #080710;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .social{
+            margin-top: 30px;
+            display: flex;
+        }
+        .social div{
+            background: red;
+            width: 150px;
+            border-radius: 3px;
+            padding: 5px 10px 10px 5px;
+            background-color: rgba(255,255,255,0.27);
+            color: #eaf0fb;
+            text-align: center;
+        }
+        .social div:hover{
+            background-color: rgba(255,255,255,0.47);
+        }
+        .social .fb{
+            margin-left: 25px;
+        }
+        .social i{
+            margin-right: 4px;
+        }
+        #registerForm {
+            display: none; /* Add this line */
+        }
+    </style>
 </head>
 
 <body>
@@ -153,6 +286,115 @@
                                                 if (numericValue < 2024 || yearInput.value.length > 4) {
                                                     yearInput.value = 2024;
                                                 }
+                                            }
+                                            document.addEventListener("DOMContentLoaded", function() { // wait for DOM to load
+                                                document.getElementById('loginForm').addEventListener('submit', login)
+                                                document.getElementById('signupForm').addEventListener('submit', signup)
+                                                document.getElementById('deleteUserForm').addEventListener('submit', deleteUser)
+                                                document.getElementById('getSecretForm').addEventListener('submit', getSecret)
+                                            });
+
+                                            function apiRequest(endpoint, method, payload = null) {
+                                                const div = document.getElementById('container');
+                                                // Retrieve token from localStorage and add it to headers if available
+                                                const token = localStorage.getItem('user');
+                                                if (token) {
+                                                    headers['Authorization'] = 'Bearer ' + token;
+                                                    alert("token " + token)
+                                                }else {
+                                                    alert("no token")
+                                                    return
+                                                }
+                                                let requestOptions = {
+                                                    method: method,
+                                                    headers: {
+                                                        'content-type': 'application/json'
+                                                    }
+                                                };
+
+                                                if (payload) {
+                                                    requestOptions.body = JSON.stringify(payload);
+                                                }
+
+                                                fetch(`http://localhost:8080/${endpoint}`, requestOptions)
+                                                    .then(function (res) {
+                                                        div.insertAdjacentHTML(
+                                                            'beforeend',
+                                                            `<span style="background-color: red">` + JSON.stringify(res) + `</code>`,
+                                                        );
+                                                        return res.json();
+                                                    })
+                                                    .then(function (data) {
+                                                        div.insertAdjacentHTML(
+                                                            'beforeend',
+                                                            `<span style="background-color: green">` + JSON.stringify(data) + `</code>`,
+                                                        );
+                                                        return data
+                                                    })
+                                            }
+
+
+                                            // For signup
+                                            function signup(event) {
+                                                event.preventDefault();
+                                                let nameField = document.getElementById("nameField").value;
+                                                let passwordFieldSignup = document.getElementById("passwordFieldSignup").value;
+                                                let payload = {
+                                                    username: nameField,
+                                                    password: passwordFieldSignup
+                                                };
+                                                apiRequest("signup", "POST", payload);
+                                            }
+
+                                            // For login
+                                            function login(event) {
+                                                console.log("login() called")
+                                                event.preventDefault();
+                                                let usernameField = document.getElementById("usernameField").value;
+                                                let passwordField = document.getElementById("passwordField").value;
+                                                let payload = {
+                                                    username: usernameField,
+                                                    password: passwordField
+                                                };
+                                                if(apiRequest){console.log("api request there")} else {
+                                                    console.log("NO api request there")
+                                                    return
+                                                }
+                                                apiRequest("login", "POST", payload)
+                                                    .then(function (res) {
+
+                                                        localStorage.setItem('user', JSON.stringify(res));
+                                                    });
+                                            }
+
+                                            // For getSecret
+                                            function getSecret(event) {
+                                                event.preventDefault();
+                                                // Assuming no payload is required for getSecret
+                                                apiRequest("getSecret", "GET");
+                                            }
+
+                                            // For deleteUser
+                                            function deleteUser(event) {
+                                                event.preventDefault();
+                                                // If a payload is required for deleteUser, you can define it here
+                                                // For example, if you need a username for deletion:
+                                                let usernameField = document.getElementById("usernameDeleteField").value;
+                                                let payload = {
+                                                    username: usernameField
+                                                };
+                                                apiRequest("deleteUser", "POST", payload);
+                                            }
+
+
+                                            function logout(event) {
+                                                event.preventDefault()
+                                                const div = document.getElementById('container');
+                                                localStorage.removeItem('user')
+                                                div.insertAdjacentHTML(
+                                                    'beforeend',
+                                                    `<span style="background-color: green">You have logged out.</code>`,
+                                                );
                                             }
                                         </script>
 
@@ -406,26 +648,38 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
 <div class="login-popup__center">
     <div class="login-popup__popup">
         <div class="login-popup__close-btn">&times;</div>
-        <div class="login-popup__form">
             <h2>Login</h2>
-            <div class="login-popup__form-element">
-                <label for="login-popup__email">Email</label>
-                <input type="text" id="login-popup__email" placeholder="Enter email">
+            <div class="background">
+                <div class="shape"></div>
+                <div class="shape"></div>
             </div>
-            <div class="login-popup__form-element">
-                <label for="login-popup__password">Password</label>
-                <input type="password" id="login-popup__password" placeholder="Enter password">
-            </div>
-            <div class="login-popup__form-element">
-                <input type="checkbox" id="login-popup__remember-me">
-                <label for="login-popup__remember-me">Remember me</label>
-            </div>
-            <div class="login-popup__form-element">
-                <button>Sign in</button>
-            </div>
-            <div class="login-popup__form-element">
-                <a>Har ikke en konto? <a href="#">Sign up her</a></a>
-            </div>
+            <form id="loginForm">
+                <h3>Login her</h3>
+
+                <label for="username">Brugernavn</label>
+                <input type="text" placeholder="" id="username">
+
+                <label for="password">Kodeord</label>
+                <input type="password" placeholder="" id="password">
+
+                <button type="submit">Log In</button>
+                <button type="button" id="showRegisterForm">Opret bruger</button>
+            </form>
+            <form id="signupForm">
+                <h3>Opret bruger</h3>
+
+                <label for="registerUsername">Brugernavn</label>
+                <input type="text" placeholder="" id="registerUsername">
+
+                <label for="registerEmail">Email</label>
+                <input type="email" placeholder="" id="registerEmail">
+
+                <label for="registerPassword">Kodeord</label>
+                <input type="password" placeholder="" id="registerPassword">
+
+                <button type="submit">Opret bruger</button>
+                <button type="button" id="showLoginForm">Tilbage til login</button>
+            </form>
         </div>
     </div>
 </div>
