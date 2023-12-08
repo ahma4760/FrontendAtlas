@@ -149,10 +149,10 @@ window.addEventListener('load', function() {
                 tbody.appendChild(tr);
                 tr.appendChild(tdId);
                 tr.appendChild(tdTitle);
-                tr.appendChild(tdPrice);
                 tr.appendChild(tdDesc);
+                tr.appendChild(tdPrice);
             });
-        }).then(function() {
+
             var $dishPopup = $('#dishPopup');
 
             $('.dish-row').click(function (e) {
@@ -201,7 +201,7 @@ window.addEventListener('load', function() {
             $(window).scroll(function () {
                 $dishPopup.hide();
             });
-        });
+        })
 
     });
 });
