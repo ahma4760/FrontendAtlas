@@ -4,15 +4,18 @@ document.addEventListener("DOMContentLoaded", function() {
     const popup = document.querySelector(".login-popup__popup");
     const closeBtn = document.querySelector(".login-popup__popup .login-popup__close-btn");
     const overlay = document.querySelector("#login-popup__overlay");
+    const loginPopupCenter = document.getElementById("loginOverlay");
 
     // Function to show the popup and overlay
     function showPopup() {
+        loginPopupCenter.setAttribute("style", "z-index:200;")
         popup.classList.add("active");
         overlay.classList.add("active");
     }
 
     // Function to hide the popup and overlay
     function hidePopup() {
+        loginPopupCenter.setAttribute("style", "z-index:-1;")
         popup.classList.remove("active");
         overlay.classList.remove("active");
     }
