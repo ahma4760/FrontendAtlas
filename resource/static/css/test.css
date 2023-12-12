@@ -179,6 +179,7 @@ body {
     /*transition: border-bottom 0.5s;
     color: white;*/
     border-bottom: 2px solid #ffa500;
+    pointer: cursor;
 }
 
 .navbar-nav .nav-link {
@@ -372,11 +373,3 @@ html {
 #myModal .col-md-6 {
     border:none;
 }
-
-#myModal .modal-title {
-    color:black;
-}
-
-
-
-
