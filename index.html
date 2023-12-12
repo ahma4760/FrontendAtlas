@@ -597,9 +597,8 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
     }
 
 
-    // For login
     function login(event) {
-        console.log("login() called")
+        console.log("login() called");
         if (event) {
             event.preventDefault();
         }
@@ -616,12 +615,17 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
             .then(function (res) {
                 // Luk modalen efter login
                 $('#minModal').modal('hide');
+
+                // Vis en besked i konsollen
+                console.log("Logget ind:", res);
+
+                // Her kan du også tilføje kode til at opdatere UI eller udføre andre handlinger efter login
             })
             .catch(function (error) {
                 // Håndter fejl, fx. vis en fejlmeddelelse til brugeren
                 console.error("Login fejlede:", error);
                 // Vis fejlmeddelelse til brugeren, fx. ved at tilføje en klasse til en fejlmeddelelsescontainer
-                document.getElementById('loginError').classList.add('show');
+                document.getElementById('loginError').style.display = 'block';
             });
     }
 </script>
