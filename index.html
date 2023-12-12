@@ -575,9 +575,19 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
             username: nameField,
             password: passwordFieldSignup
         };
-        apiRequest("signup", "POST", payload);
+        apiRequest("signup", "POST", payload)
+            .then(function (res){
+                hideModal();
+            })
+            .catch(function (error){
+                console.error('Registration failed:', error);
+            });
     }
-
+    // Funktion til at skjule modalen
+    function hideModal() {
+        const minModal = document.getElementById('minModal');
+        minModal.style.display = 'none';
+    }
     // For login
     function login() {
         let usernameField = document.getElementById("usernameField").value;
