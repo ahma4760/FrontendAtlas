@@ -506,7 +506,7 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
                 <input type="password" placeholder="" id="passwordFieldSignup">
 
                 <button type="submit">Opret bruger</button>
-                <button type="button" id="showLoginForm">Tilbage til login</button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </form>
         </div>
     </div>
@@ -566,7 +566,7 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
                 return Promise.reject(error);
             });
     }
-    
+
     // For signup
     function register() {
         let nameField = document.getElementById("registerUsername").value;
