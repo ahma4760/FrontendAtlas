@@ -495,6 +495,10 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
 
                 <button type="submit">Log ind</button>
                 <button type="button" id="showRegisterForm">Opret bruger</button>
+                
+                <div id="loginError" class="alert alert-danger" style="display: none;">
+                    <p>Login mislykkedes. Prøv igen.</p>
+                </div>
             </form>
             <form id="registerForm">
                 <h3>Opret nu</h3>
@@ -594,7 +598,9 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
 
 
     // For login
-    function login() {
+    function login(event) {
+        console.log("login() called")
+        event.preventDefault();
         let usernameField = document.getElementById("usernameField").value;
         let passwordField = document.getElementById("passwordField").value;
         let payload = {
@@ -602,12 +608,17 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
             password: passwordField
         };
 
+        // Gør dit API-kald
         apiRequest("login", "POST", payload)
             .then(function (res) {
-                localStorage.setItem('user', JSON.stringify(res));
+                // Luk modalen efter login
+                $('#minModal').modal('hide');
             })
             .catch(function (error) {
-                console.error('Login failed:', error);
+                // Håndter fejl, fx. vis en fejlmeddelelse til brugeren
+                console.error("Login fejlede:", error);
+                // Vis fejlmeddelelse til brugeren, fx. ved at tilføje en klasse til en fejlmeddelelsescontainer
+                document.getElementById('loginError').classList.add('show');
             });
     }
 </script>
