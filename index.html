@@ -498,19 +498,23 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
             </form>
             <form id="registerForm">
                 <h3>Opret nu</h3>
+                <label for="registerUsername">Brugernavn</label>
+                <!-- Opdateret id for brugernavn-input -->
+                <input type="text" placeholder="" id="registerUsername" name="nameField">
 
-                <label for="nameField">Brugernavn</label>
-                <input type="text" placeholder="" id="nameField">
-
-                <label for="passwordFieldSignup">Kodeord</label>
-                <input type="password" placeholder="" id="passwordFieldSignup">
+                <label for="registerPassword">Kodeord</label>
+                <!-- Opdateret id for kodeord-input -->
+                <input type="password" placeholder="" id="registerPassword" name="passwordFieldSignup">
 
                 <button type="submit">Opret bruger</button>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" id="showLoginForm">Tilbage til login</button>
             </form>
+            <!-- Tilføjet knap med btn-close klasse -->
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
     </div>
 </div>
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const loginForm = document.getElementById('loginForm');
