@@ -597,6 +597,7 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
     }
 
 
+    // For login
     function login(event) {
         console.log("login() called");
         if (event) {
@@ -614,7 +615,8 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
         apiRequest("login", "POST", payload)
             .then(function (res) {
                 // Luk modalen efter login
-                $('#minModal').modal('hide');
+                let modal = document.getElementById('minModal');
+                modal.style.display = 'none';
 
                 // Vis en besked i konsollen
                 console.log("Logget ind:", res);
@@ -628,6 +630,7 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
                 document.getElementById('loginError').style.display = 'block';
             });
     }
+
 </script>
 
 
