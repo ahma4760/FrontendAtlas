@@ -566,28 +566,29 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
                 return Promise.reject(error);
             });
     }
-
+    
     // For signup
     function register() {
-        let nameField = document.getElementById("nameField").value;
-        let passwordFieldSignup = document.getElementById("passwordFieldSignup").value;
+        let nameField = document.getElementById("registerUsername").value;
+        let passwordFieldSignup = document.getElementById("registerPassword").value;
         let payload = {
             username: nameField,
             password: passwordFieldSignup
         };
         apiRequest("signup", "POST", payload)
-            .then(function (res){
-                hideModal();
+            .then(function (res) {
+                // "Luk" modalen ved at simulere et klik på lukningsknappen
+                let closeButton = document.querySelector("#minModal .btn-close");
+                if (closeButton) {
+                    closeButton.click();
+                }
             })
-            .catch(function (error){
+            .catch(function (error) {
                 console.error('Registration failed:', error);
             });
     }
-    // Funktion til at skjule modalen
-    function hideModal() {
-        const minModal = document.getElementById('minModal');
-        minModal.style.display = 'none';
-    }
+
+
     // For login
     function login() {
         let usernameField = document.getElementById("usernameField").value;
