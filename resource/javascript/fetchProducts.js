@@ -136,6 +136,7 @@ window.addEventListener('load', function() {
                 tr.setAttribute("data-name", item.title);
                 tr.setAttribute("data-price", item.price);
                 tr.setAttribute("data-image", item.imagePath);
+                tr.setAttribute("data-id", item.id);
 
                 let tdId = document.createElement("td");
                 tdId.innerHTML = item.id;
@@ -158,9 +159,10 @@ window.addEventListener('load', function() {
             $('.dish-row').click(function (e) {
                 var dishName = $(this).data('name');
                 var dishPrice = parseFloat($(this).data('price'));
+                var dishId = parseInt($(this).data('id'));
                 //var imagePath = $(this).data('image');
 
-                $('#cart').append('<li class="list-group-item" data-price="' + dishPrice + '">' + dishName + ' ' + 
+                $('#cart').append('<li class="list-group-item" data-id="' + dishId + '" data-price="' + dishPrice + '">' + dishName + ' ' + 
                     dishPrice.toFixed(2) + ',-' + '<img src="https://static.vecteezy.com/system/resources/previews/000/630/479/non_2x/vector-trash-can-icon-symbol-illustration.jpg" class="remove-icon float-right" alt="Remove"></li>');
 
                 updateTotal();
