@@ -495,7 +495,7 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
 
                 <button type="submit">Log ind</button>
                 <button type="button" id="showRegisterForm">Opret bruger</button>
-                
+
                 <div id="loginError" class="alert alert-danger" style="display: none;">
                     <p>Login mislykkedes. Prøv igen.</p>
                 </div>
@@ -600,7 +600,10 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
     // For login
     function login(event) {
         console.log("login() called")
-        event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
+
         let usernameField = document.getElementById("usernameField").value;
         let passwordField = document.getElementById("passwordField").value;
         let payload = {
