@@ -493,12 +493,13 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
                 <label for="passwordField">Kodeord</label>
                 <input type="password" placeholder="" id="passwordField">
 
-                <button type="submit">Log ind</button>
+                <button type="submit" class="btn-close" data-bs-dismiss="modal" aria-label="Close" >Log ind</button>
                 <button type="button" id="showRegisterForm">Opret bruger</button>
 
                 <div id="loginError" class="alert alert-danger" style="display: none;">
                     <p>Login mislykkedes. Prøv igen.</p>
                 </div>
+                
             </form>
             <form id="registerForm">
                 <h3>Opret nu</h3>
@@ -614,9 +615,11 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
         // Gør dit API-kald
         apiRequest("login", "POST", payload)
             .then(function (res) {
-                // Luk modalen efter login
-                let modal = document.getElementById('minModal');
-                modal.style.display = 'none';
+                // "Luk" modalen ved at simulere et klik på lukningsknappen
+                let closeButton = document.querySelector("#minModal .btn-close");
+                if (closeButton) {
+                    closeButton.click();
+                }
 
                 // Vis en besked i konsollen
                 console.log("Logget ind:", res);
@@ -630,7 +633,6 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
                 document.getElementById('loginError').style.display = 'block';
             });
     }
-
 </script>
 
 
