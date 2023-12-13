@@ -17,7 +17,7 @@ body::before {
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(255, 255, 255, 0.4); /* Adjust the alpha value (0.5) for transparency */
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .login-box{
