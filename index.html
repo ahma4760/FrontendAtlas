@@ -99,63 +99,6 @@
                                             <button type="button" class="btn btn-custom-orange btn-block" onclick="bekraeftBetaling()">Bekræft Betaling</button>
                                             <div id="bekraeftelseAlert" class="alert alert-success"></div>
                                         </div>
-
-
-                                        <script>
-                                            function bekraeftBetaling() {
-                                                // Få fat i alert-elementet
-                                                let alertElement = document.getElementById('bekraeftelseAlert');
-
-                                                // Indsæt den ønskede besked i alert-elementet
-                                                alertElement.textContent = "Sådan! Din betaling er modtaget.";
-
-                                                // Vis alerten
-                                                alertElement.style.display = 'block';
-                                            }
-
-                                            // Kun tal, ingen bogstaver i kortnummer
-                                            function validateCardNumber() {
-                                                let cardNumberInput = document.getElementById('cardNumberInput');
-                                                cardNumberInput.value = cardNumberInput.value.replace(/\D/g, ''); // Fjern alle ikke-tal tegn
-                                            }
-
-                                            document.getElementById('monthInput').addEventListener('input', function () {
-                                                validateMonth();
-                                            });
-
-                                            document.getElementById('yearInput').addEventListener('input', function () {
-                                                validateYear();
-                                            });
-
-                                            document.getElementById('cvvInput').addEventListener('input', function () {
-                                                let cvv = this.value.trim();
-
-                                                if (cvv.length > 3) {
-                                                    this.value = cvv.slice(0, 3); // Trim overskydende cifre
-                                                }
-                                            });
-
-                                            function validateMonth() {
-                                                let monthInput = document.getElementById('monthInput');
-                                                let numericValue = parseInt(monthInput.value, 10) || 1; // Konverter til heltal eller brug 1 som standard
-                                                if (numericValue < 1) {
-                                                    monthInput.value = 1;
-                                                } else if (numericValue > 12) {
-                                                    monthInput.value = 12;
-                                                }
-                                            }
-
-                                            function validateYear() {
-                                                let yearInput = document.getElementById('yearInput');
-                                                let numericValue = parseInt(yearInput.value, 10) || 2024; // Konverter til heltal eller brug 2024 som standard
-
-                                                // Tjek om indtastede år er mindre end 2024 eller har mere end 4 cifre
-                                                if (numericValue < 2024 || yearInput.value.length > 4) {
-                                                    yearInput.value = 2024;
-                                                }
-                                            }
-                                        </script>
-
                                     </form>
                                 </div>
                             </div>
@@ -409,8 +352,10 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
         <div class="login-popup__form">
             <h2>Login</h2>
             <div class="login-popup__form-element">
-                <label for="login-popup__email">Email</label>
-                <input type="text" id="login-popup__email" placeholder="Enter email">
+                <form id="loginForm">
+                    <label for="login-popup__email">Email</label>
+                    <input type="text" id="login-popup__email" placeholder="Enter email">
+                </form>
             </div>
             <div class="login-popup__form-element">
                 <label for="login-popup__password">Password</label>
@@ -421,7 +366,7 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
                 <label for="login-popup__remember-me">Remember me</label>
             </div>
             <div class="login-popup__form-element">
-                <button>Sign in</button>
+                <button type="submit">Sign in</button>
             </div>
             <div class="login-popup__form-element">
                 <a>Har ikke en konto? <a href="#">Sign up her</a></a>
@@ -429,6 +374,119 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
         </div>
     </div>
 </div>
+ <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+
+        loginForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        login();
+    });
+
+        registerForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        register();
+    });
+
+        const showRegisterFormButton = document.getElementById('showRegisterForm');
+        const showLoginFormButton = document.getElementById('showLoginForm');
+
+        showRegisterFormButton.addEventListener('click', function () {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+    });
+
+        showLoginFormButton.addEventListener('click', function () {
+        registerForm.style.display = 'none';
+        loginForm.style.display = 'block';
+    });
+    });
+
+        function apiRequest(endpoint, method, payload = null) {
+        const div = document.getElementById('container');
+
+        let requestOptions = {
+        method: method,
+        headers: {
+        'content-type': 'application/json'
+    }
+    };
+
+        if (payload) {
+        requestOptions.body = JSON.stringify(payload);
+    }
+
+        return fetch(`http://localhost:8080/${endpoint}`, requestOptions)
+        .then(function (res) {
+        return res.json();
+    })
+        .then(function (data) {
+        return data;
+    })
+        .catch(function (error) {
+        console.error('API request failed:', error);
+        return Promise.reject(error);
+    });
+    }
+
+        /*// For signup
+        function register() {
+        let nameField = document.getElementById("registerUsername").value;
+        let passwordFieldSignup = document.getElementById("registerPassword").value;
+        let payload = {
+        username: nameField,
+        password: passwordFieldSignup
+    };
+        apiRequest("signup", "POST", payload)
+        .then(function (res) {
+        // "Luk" modalen ved at simulere et klik på lukningsknappen
+        let closeButton = document.querySelector("#minModal .btn-close");
+        if (closeButton) {
+        closeButton.click();
+    }
+    })
+        .catch(function (error) {
+        console.error('Registration failed:', error);
+    });
+    }*/
+
+        // For login
+        function login(event) {
+        console.log("login() called");
+        if (event) {
+        event.preventDefault();
+    }
+
+        let usernameField = document.getElementById("login-popup__email").value;
+        let passwordField = document.getElementById("login-popup__password").value;
+        let payload = {
+        username: usernameField,
+        password: passwordField
+    };
+
+        // Gør dit API-kald
+        apiRequest("login", "POST", payload)
+        .then(function (res) {
+        // "Luk" modalen ved at simulere et klik på lukningsknappen
+        let closeButton = document.querySelector("#minModal .btn-close");
+        if (closeButton) {
+        closeButton.click();
+    }
+
+        // Vis en besked i konsollen
+        console.log("Logget ind:", res);
+
+        // Her kan du også tilføje kode til at opdatere UI eller udføre andre handlinger efter login
+    })
+        .catch(function (error) {
+        // Håndter fejl, fx. vis en fejlmeddelelse til brugeren
+        console.error("Login fejlede:", error);
+        // Vis fejlmeddelelse til brugeren, fx. ved at tilføje en klasse til en fejlmeddelelsescontainer
+        document.getElementById('loginError').style.display = 'block';
+    });
+    }
+</script>
 
 <div id="login-popup__overlay"></div>
 
