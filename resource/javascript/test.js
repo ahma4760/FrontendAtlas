@@ -4,9 +4,9 @@ $(document).ready(function () {
     $('.dish-row').click(function (e) {
         var dishName = $(this).data('name');
         var dishPrice = parseFloat($(this).data('price'));
-        var imagePath = $(this).data('image');
+        var dishId = $(this).data('id');
 
-        $('#cart').append('<li class="list-group-item" data-price="' + dishPrice + '">' + dishName +
+        $('#cart').append('<li class="list-group-item" data-id="' + dishId + '" data-price="' + dishPrice + '">' + dishName +
             ' - $' + dishPrice.toFixed(2) + '<img src="https://static.vecteezy.com/system/resources/previews/000/630/479/non_2x/vector-trash-can-icon-symbol-illustration.jpg" class="remove-icon float-right" alt="Remove"></li>');
 
         updateTotal();
