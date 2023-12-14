@@ -2,5 +2,9 @@
   "name": "FrontendAtlas",
   "version": "1.0.0",
   "dependencies": {
+  },
+  "scripts":{
+    "build": "npm run your_build_command_here"
   }
 }
+
