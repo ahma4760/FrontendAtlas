@@ -4,7 +4,7 @@
   "dependencies": {
   },
   "scripts":{
-    "build": "npm run your_build_command_here"
+    "build": "npm run build"
   }
 }
 
