@@ -1,10 +1,3 @@
-body {
-    background: black;
-    margin: 20px;
-}
-.rounded {
-    border-radius: 1em;
-}
 .nav-pills .nav-link {
     color: #555;
 }
@@ -43,4 +36,5 @@ input[type="radio"] {
     display: none;
 }
 @media screen and (min-width: 768px) {
+    /* Tilpas stilarter for større skærme her */
 }

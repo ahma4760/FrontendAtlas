@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+/*document.addEventListener("DOMContentLoaded", function() {
     // Get references to the necessary elements
     const showLoginButton = document.querySelector("#login-popup__show-login");
     const popup = document.querySelector(".login-popup__popup");
@@ -30,3 +30,4 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     })
 });
+*/
