@@ -7,12 +7,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet" href="resource/static/css/test.css">
     <link rel="stylesheet" href="resource/static/css/indexStylesheetPopup.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
@@ -32,17 +28,14 @@
             width: 430px;
             height: 520px;
             position: absolute;
-            transform: translate(-50%,-50%);
-            left: 50%;
-            top: 50%;
-            z-index: -1; /* Add this line */
         }
+
         .background .shape{
             height: 200px;
             width: 200px;
             position: absolute;
             border-radius: 50%;
-            z-index: -1; /* Add this line */
+            margin-top: 100px;
         }
         .shape:first-child{
             background: linear-gradient(
@@ -58,23 +51,21 @@
                     #ff512f,
                     #f09819
             );
-            right: -30px;
-            bottom: -80px;
+            right: -65px;
+            bottom: -190px;
         }
         form{
             height: 520px;
             width: 400px;
             background-color: rgba(255,255,255,0.13);
             position: absolute;
-            transform: translate(-50%,-50%);
-            top: 50%;
-            left: 50%;
             border-radius: 10px;
             backdrop-filter: blur(10px);
             border: 2px solid rgba(255,255,255,0.1);
             box-shadow: 0 0 40px rgba(8,7,16,0.6);
             padding: 50px 35px;
-            z-index: 1; /* Add this line */
+            z-index: 1;
+            margin-top: 100px;
         }
         form *{
             font-family: 'Poppins',sans-serif;
@@ -145,6 +136,12 @@
         }
         #registerForm {
             display: none; /* Add this line */
+        }
+        .modal-content{
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
         }
     </style>
 </head>
@@ -287,24 +284,39 @@
                                                     yearInput.value = 2024;
                                                 }
                                             }
-                                            document.addEventListener("DOMContentLoaded", function() { // wait for DOM to load
-                                                document.getElementById('loginForm').addEventListener('submit', login)
-                                                document.getElementById('signupForm').addEventListener('submit', signup)
-                                                document.getElementById('deleteUserForm').addEventListener('submit', deleteUser)
-                                                document.getElementById('getSecretForm').addEventListener('submit', getSecret)
+
+
+                                            document.addEventListener("DOMContentLoaded", function () {
+                                                const loginForm = document.getElementById('loginForm');
+                                                const registerForm = document.getElementById('registerForm');
+
+                                                loginForm.addEventListener('submit', function (event) {
+                                                    event.preventDefault();
+                                                    login();
+                                                });
+
+                                                registerForm.addEventListener('submit', function (event) {
+                                                    event.preventDefault();
+                                                    register();
+                                                });
+
+                                                const showRegisterFormButton = document.getElementById('showRegisterForm');
+                                                const showLoginFormButton = document.getElementById('showLoginForm');
+
+                                                showRegisterFormButton.addEventListener('click', function () {
+                                                    loginForm.style.display = 'none';
+                                                    registerForm.style.display = 'block';
+                                                });
+
+                                                showLoginFormButton.addEventListener('click', function () {
+                                                    registerForm.style.display = 'none';
+                                                    loginForm.style.display = 'block';
+                                                });
                                             });
 
                                             function apiRequest(endpoint, method, payload = null) {
                                                 const div = document.getElementById('container');
-                                                // Retrieve token from localStorage and add it to headers if available
-                                                const token = localStorage.getItem('user');
-                                                if (token) {
-                                                    headers['Authorization'] = 'Bearer ' + token;
-                                                    alert("token " + token)
-                                                }else {
-                                                    alert("no token")
-                                                    return
-                                                }
+
                                                 let requestOptions = {
                                                     method: method,
                                                     headers: {
@@ -316,85 +328,75 @@
                                                     requestOptions.body = JSON.stringify(payload);
                                                 }
 
-                                                fetch(`http://localhost:8080/${endpoint}`, requestOptions)
+                                                return fetch(`http://localhost:8080/${endpoint}`, requestOptions)
                                                     .then(function (res) {
-                                                        div.insertAdjacentHTML(
-                                                            'beforeend',
-                                                            `<span style="background-color: red">` + JSON.stringify(res) + `</code>`,
-                                                        );
                                                         return res.json();
                                                     })
                                                     .then(function (data) {
-                                                        div.insertAdjacentHTML(
-                                                            'beforeend',
-                                                            `<span style="background-color: green">` + JSON.stringify(data) + `</code>`,
-                                                        );
-                                                        return data
+                                                        return data;
                                                     })
+                                                    .catch(function (error) {
+                                                        console.error('API request failed:', error);
+                                                        return Promise.reject(error);
+                                                    });
                                             }
 
-
                                             // For signup
-                                            function signup(event) {
-                                                event.preventDefault();
-                                                let nameField = document.getElementById("nameField").value;
-                                                let passwordFieldSignup = document.getElementById("passwordFieldSignup").value;
+                                            function register() {
+                                                let nameField = document.getElementById("registerUsername").value;
+                                                let passwordFieldSignup = document.getElementById("registerPassword").value;
                                                 let payload = {
                                                     username: nameField,
                                                     password: passwordFieldSignup
                                                 };
-                                                apiRequest("signup", "POST", payload);
+                                                apiRequest("signup", "POST", payload)
+                                                    .then(function (res) {
+                                                        // "Luk" modalen ved at simulere et klik på lukningsknappen
+                                                        let closeButton = document.querySelector("#minModal .btn-close");
+                                                        if (closeButton) {
+                                                            closeButton.click();
+                                                        }
+                                                    })
+                                                    .catch(function (error) {
+                                                        console.error('Registration failed:', error);
+                                                    });
                                             }
+
 
                                             // For login
                                             function login(event) {
-                                                console.log("login() called")
-                                                event.preventDefault();
+                                                console.log("login() called");
+                                                if (event) {
+                                                    event.preventDefault();
+                                                }
+
                                                 let usernameField = document.getElementById("usernameField").value;
                                                 let passwordField = document.getElementById("passwordField").value;
                                                 let payload = {
                                                     username: usernameField,
                                                     password: passwordField
                                                 };
-                                                if(apiRequest){console.log("api request there")} else {
-                                                    console.log("NO api request there")
-                                                    return
-                                                }
+
+                                                // Gør dit API-kald
                                                 apiRequest("login", "POST", payload)
                                                     .then(function (res) {
+                                                        // "Luk" modalen ved at simulere et klik på lukningsknappen
+                                                        let closeButton = document.querySelector("#minModal .btn-close");
+                                                        if (closeButton) {
+                                                            closeButton.click();
+                                                        }
 
-                                                        localStorage.setItem('user', JSON.stringify(res));
+                                                        // Vis en besked i konsollen
+                                                        console.log("Logget ind:", res);
+
+                                                        // Her kan du også tilføje kode til at opdatere UI eller udføre andre handlinger efter login
+                                                    })
+                                                    .catch(function (error) {
+                                                        // Håndter fejl, fx. vis en fejlmeddelelse til brugeren
+                                                        console.error("Login fejlede:", error);
+                                                        // Vis fejlmeddelelse til brugeren, fx. ved at tilføje en klasse til en fejlmeddelelsescontainer
+                                                        document.getElementById('loginError').style.display = 'block';
                                                     });
-                                            }
-
-                                            // For getSecret
-                                            function getSecret(event) {
-                                                event.preventDefault();
-                                                // Assuming no payload is required for getSecret
-                                                apiRequest("getSecret", "GET");
-                                            }
-
-                                            // For deleteUser
-                                            function deleteUser(event) {
-                                                event.preventDefault();
-                                                // If a payload is required for deleteUser, you can define it here
-                                                // For example, if you need a username for deletion:
-                                                let usernameField = document.getElementById("usernameDeleteField").value;
-                                                let payload = {
-                                                    username: usernameField
-                                                };
-                                                apiRequest("deleteUser", "POST", payload);
-                                            }
-
-
-                                            function logout(event) {
-                                                event.preventDefault()
-                                                const div = document.getElementById('container');
-                                                localStorage.removeItem('user')
-                                                div.insertAdjacentHTML(
-                                                    'beforeend',
-                                                    `<span style="background-color: green">You have logged out.</code>`,
-                                                );
                                             }
                                         </script>
 
@@ -425,7 +427,7 @@
                   <a class="nav-link" href="#menukort">Bestil mad</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" id="login-popup__show-login" style="cursor: pointer">Log ind</a>
+                  <a class="nav-link" data-bs-toggle="modal" data-bs-target="#minModal" style="cursor: pointer">Log ind</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="#om-os">Om os</a>
@@ -543,11 +545,11 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
   </div>
 </div>
 
-<!---Popup login --->
-<div class="login-popup__center" id="loginOverlay" style="z-index:-1;">
-    <div class="login-popup__popup">
-        <div class="login-popup__close-btn">&times;</div>
-            <h2>Login</h2>
+<!-- LOGIND Modalen -->
+<div class="modal" id="minModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modalindhold -->
             <div class="background">
                 <div class="shape"></div>
                 <div class="shape"></div>
@@ -555,35 +557,36 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
             <form id="loginForm">
                 <h3>Login her</h3>
 
-                <label for="username">Brugernavn</label>
-                <input type="text" placeholder="" id="username">
+                <label for="usernameField">Brugernavn</label>
+                <input type="text" placeholder="" id="usernameField">
 
-                <label for="password">Kodeord</label>
-                <input type="password" placeholder="" id="password">
+                <label for="passwordField">Kodeord</label>
+                <input type="password" placeholder="" id="passwordField">
 
-                <button type="submit">Log In</button>
+                <button type="submit" class="btn-close" data-bs-dismiss="modal" aria-label="Close" >Log ind</button>
                 <button type="button" id="showRegisterForm">Opret bruger</button>
+
             </form>
-            <form id="signupForm">
-                <h3>Opret bruger</h3>
-
+            <form id="registerForm">
+                <h3>Opret nu</h3>
                 <label for="registerUsername">Brugernavn</label>
-                <input type="text" placeholder="" id="registerUsername">
 
-                <label for="registerEmail">Email</label>
-                <input type="email" placeholder="" id="registerEmail">
+                <input type="text" placeholder="" id="registerUsername" name="nameField">
 
                 <label for="registerPassword">Kodeord</label>
-                <input type="password" placeholder="" id="registerPassword">
 
-                <button type="submit">Opret bruger</button>
+                <input type="password" placeholder="" id="registerPassword" name="passwordFieldSignup">
+
+                <button type="submit" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Opret bruger</button>
                 <button type="button" id="showLoginForm">Tilbage til login</button>
             </form>
+            <!-- Tilføjet knap med btn-close klasse -->
+            <!--<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
         </div>
     </div>
 </div>
 
-<div id="login-popup__overlay"></div>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
@@ -592,10 +595,11 @@ SØNDAG / HELLIGDAGE 12:00 - 23:00
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!--<script src="resource/javascript/test.js"></script>-->
+<script src="resource/javascript/test.js"></script>
 <script src="resource/javascript/fetchProducts.js"></script>
-<script src="resource/javascript/indexJavascriptPopup.js"></script>
 <script src="resource/javascript/createOrder.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

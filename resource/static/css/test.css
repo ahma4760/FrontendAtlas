@@ -324,7 +324,7 @@ html {
     padding: 40px;
 }
 
-/* Payment modal */
+/*Payment modal */
 
 
 #myModal .rounded {
@@ -357,12 +357,12 @@ html {
 }
 #myModal .btn-custom-orange {
     color: #fff;
-    background-color: #ffA500; /* Baggrundsfarven (orange) */
-    border-color: #ffA500; /* Farven på kanten/border */
+    background-color: #ffA500;
+    border-color: #ffA500;
 }
 
 #myModal .btn-custom-orange:hover {
-    background-color: #e59400; /* Farve ved hover (mørkere orange) */
+    background-color: #e59400;
     border-color: #e59400;
 }
 #bekraeftelseAlert {
@@ -376,7 +376,6 @@ html {
 #myModal .modal-title {
     color:black;
 }
-
 
 
 
