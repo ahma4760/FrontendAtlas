@@ -1,6 +1,6 @@
 // This JS file is used to fill out the menu on the front page
 
-const apiUrl = "http://localhost:3333";
+const apiUrl = "http://51.145.199.129:3333";
 
 /* ===== Class definitions =====*/
 
