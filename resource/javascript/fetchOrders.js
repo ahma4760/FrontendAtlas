@@ -1,6 +1,6 @@
 // API URL
 
-const apiUrl = "http://localhost:8080";
+const apiUrl = "http://localhost:3333";
 
 // HTML elements
 const receivedOrders = document.getElementById("receivedOrders");

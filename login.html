@@ -34,7 +34,7 @@
                 requestOptions.body = JSON.stringify(payload);
             }
 
-            fetch(`http://localhost:8080/${endpoint}`, requestOptions)
+            fetch(`http://localhost:3333/${endpoint}`, requestOptions)
                 .then(function (res) {
                     div.insertAdjacentHTML(
                         'beforeend',

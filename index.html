@@ -328,7 +328,7 @@
                                                     requestOptions.body = JSON.stringify(payload);
                                                 }
 
-                                                return fetch(`http://localhost:8080/${endpoint}`, requestOptions)
+                                                return fetch(`http://localhost:3333/${endpoint}`, requestOptions)
                                                     .then(function (res) {
                                                         return res.json();
                                                     })
